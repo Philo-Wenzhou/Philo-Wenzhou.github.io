@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>易文星 | 技术与学术主页</title>
+  <meta name="description" content="易文星：生态学与数据科学交叉研究，气象与遥感建模、统计与机器学习。" />
+  <meta property="og:title" content="易文星 | 技术与学术主页" />
+  <meta property="og:description" content="生态学 × 数据科学 × 气象遥感建模。" />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="zh_CN" />
+  <meta name="theme-color" content="#0f172a">
+  <style>
+    /* === CSS 变量 & 重置 === */
+    :root{
+      --bg: #0b1020;           /* 背景 */
+      --panel: #0f172a;        /* 面板 */
+      --muted: #94a3b8;        /* 次要文字 */
+      --text: #e6edf3;         /* 正文 */
+      --brand: #60a5fa;        /* 品牌蓝 */
+      --accent: #22d3ee;       /* 霓虹青 */
+      --ring: rgba(96,165,250,.25);
+      --card: #0b1220;
+      --border: #1f2a44;
+    }
+    @media (prefers-color-scheme: light){
+      :root{
+        --bg:#f8fafc; --panel:#ffffff; --muted:#475569; --text:#0f172a; --brand:#2563eb; --accent:#0891b2; --ring:rgba(37,99,235,.15); --card:#ffffff; --border:#e5e7eb;
+      }
+    }
+    *,*::before,*::after{ box-sizing:border-box }
+    html,body{ height:100% }
+    body{
+      margin:0; font: 16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Noto Sans",sans-serif;
+      background: radial-gradient(1200px 800px at 10% -10%, rgba(34,211,238,.08), transparent 40%),
+                  radial-gradient(800px 600px at 110% 20%, rgba(96,165,250,.08), transparent 40%),
+                  var(--bg);
+      color: var(--text);
+    }
+    a{ color: var(--brand); text-decoration: none }
+    a:hover{ text-decoration: underline }
+
+    /* === 布局 === */
+    .wrapper{ max-width:1200px; margin:0 auto; padding:24px; }
+    .grid{
+      display:grid; grid-template-columns: 320px 1fr; gap:24px;
+    }
+    @media (max-width: 900px){ .grid{ grid-template-columns: 1fr } }
+
+    /* === 侧边栏 === */
+    .sidebar{
+      position: sticky; top:24px; align-self:start;
+      background: linear-gradient(180deg, var(--panel), var(--card));
+      border: 1px solid var(--border);
+      border-radius: 16px; padding: 24px; box-shadow: 0 10px 30px rgba(0,0,0,.25);
+    }
+    .avatar{
+      width: 96px; height:96px; border-radius: 50%; object-fit: cover; display:block; margin:0 0 12px 0;
+      border: 2px solid var(--border);
+    }
+    .name{ font-size: 1.6rem; margin: 8px 0 4px 0 }
+    .tagline{ color: var(--muted); margin: 4px 0 14px 0 }
+
+    .mini{
+      display: grid; gap:8px; margin: 14px 0 18px 0; color:var(--muted);
+    }
+    .mini b{ color: var(--text) }
+
+    .credit{
+      margin-top: 12px; font-size: .95rem; color: var(--muted);
+      padding: 10px 12px; border: 1px dashed var(--border); border-radius: 12px; background: rgba(34,211,238,.05);
+    }
+    .credit .cat{ font-weight:700; color:var(--accent) }
+
+    .links{ display:flex; gap:10px; flex-wrap:wrap; margin-top: 10px}
+    .btn{
+      display:inline-flex; align-items:center; gap:8px; padding:8px 12px; border-radius:10px;
+      background: linear-gradient(180deg, rgba(96,165,250,.12), rgba(96,165,250,.05));
+      border:1px solid var(--border);
+      transition: transform .15s ease, box-shadow .15s ease;
+    }
+    .btn:hover{ transform: translateY(-1px); box-shadow:0 6px 18px var(--ring) }
+    .btn svg{ width:18px; height:18px }
+
+    /* === 主内容 === */
+    .main{ display:grid; gap:24px }
+    .section{
+      background: linear-gradient(180deg, var(--panel), var(--card));
+      border:1px solid var(--border); border-radius:16px; padding: 20px 22px;
+    }
+    .section h2{ margin: 6px 0 10px 0; letter-spacing:.3px }
+    .list{ display:grid; gap:12px; margin:12px 0 0 0 }
+
+    .item{
+      display:flex; align-items:flex-start; gap:12px; padding:12px; border:1px solid var(--border); border-radius:12px; background: rgba(15,23,42,.35);
+      transition: border-color .15s ease, background .2s ease;
+    }
+    .item:hover{ border-color: var(--brand); background: rgba(96,165,250,.08) }
+    .item .dot{
+      flex:0 0 10px; height:10px; margin-top:6px; border-radius:50%; background: linear-gradient(135deg, var(--brand), var(--accent));
+      box-shadow: 0 0 0 3px rgba(96,165,250,.18);
+    }
+
+    .item h3{ margin:0 0 4px 0; font-size:1.05rem }
+    .meta{ color: var(--muted); font-size:.92rem }
+
+    footer{ text-align:center; color:var(--muted); padding:18px 0 36px }
+
+    /* === 可访问性 === */
+    :focus-visible{ outline: 3px solid var(--brand); outline-offset: 2px }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <div class="grid">
+      <!-- Sidebar -->
+      <aside class="sidebar" aria-label="个人信息">
+        <img src="images/avatar.jpg" alt="易文星头像" class="avatar" />
+        <div class="name">易文星</div>
+        <div class="tagline">生态学 × 数据科学｜气象与遥感建模</div>
+
+        <div class="mini">
+          <div><b>位置：</b>四川 · 成都</div>
+          <div><b>联系：</b><a href="mailto:philoyiwenxing@163.com">philoyiwenxing@163.com</a></div>
+        </div>
+
+        <div class="links" aria-label="快捷链接">
+          <a class="btn" href="cv/Philo_Wenzhou_CV.pdf" target="_blank" rel="noopener">
+            <!-- pdf icon -->
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M12 12h-3v6"/><path d="M12 18h0"/><path d="M15 18v-6h2.5a1.5 1.5 0 0 1 0 3H15"/></svg>
+            英文简历
+          </a>
+          <a class="btn" href="mailto:philoyiwenxing@163.com">
+            <!-- mail icon -->
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16v16H4z"/><path d="m22 6-10 7L2 6"/></svg>
+            邮件联系
+          </a>
+          <a class="btn" href="/" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">
+            <!-- home icon -->
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 10v10h14V10"/></svg>
+            回到顶部
+          </a>
+        </div>
+
+        <div class="credit" aria-label="作者说明">
+          本站代码由 <span class="cat">小猫奔奔 🐱</span> 编写维护。
+        </div>
+      </aside>
+
+      <!-- Main -->
+      <main class="main" id="content">
+        <!-- 笔记条目 -->
+        <section class="section" id="notes" aria-labelledby="notes-title">
+          <h2 id="notes-title">统计 / 生信 / 气象建模 · 笔记</h2>
+          <div class="list">
+            <a class="item" href="notes/biostat-cox-survival.html">
+              <span class="dot" aria-hidden="true"></span>
+              <div>
+                <h3>医学生信：Cox 生存分析与模型稳健性</h3>
+                <div class="meta">差异分析 · 富集 · PPI · 纵向判别（MCMC） · AUC 提升记录</div>
+              </div>
+            </a>
+            <a class="item" href="notes/fire-weather-forecasting.html">
+              <span class="dot" aria-hidden="true"></span>
+              <div>
+                <h3>森林火险：卫星云量/火点识别与蔓延建模</h3>
+                <div class="meta">FY4B / Himawari-8 · DEM 风场融合 · NFDRS/FBP 读书笔记</div>
+              </div>
+            </a>
+            <a class="item" href="notes/remote-sensing-ml.html">
+              <span class="dot" aria-hidden="true"></span>
+              <div>
+                <h3>遥感 × 机器学习：湿地碳损失建模实践</h3>
+                <div class="meta">CNN / RF 融合 · 数据同化与尺度统一 · 超算流水线经验</div>
+              </div>
+            </a>
+          </div>
+        </section>
+
+        <!-- 项目条目 -->
+        <section class="section" id="projects" aria-labelledby="projects-title">
+          <h2 id="projects-title">代表项目</h2>
+          <div class="list">
+            <a class="item" href="projects/med-hepatic-elasticity.html">
+              <span class="dot" aria-hidden="true"></span>
+              <div>
+                <h3>肝脏弹性驱动因素分析与纵向判别建模</h3>
+                <div class="meta">GEO / TCGA 工作流 · 生存 / Cox · MCMC 纵向建模 · 论文产出</div>
+              </div>
+            </a>
+            <a class="item" href="projects/wetland-carbon-loss.html">
+              <span class="dot" aria-hidden="true"></span>
+              <div>
+                <h3>中欧湿地近百年碳损失评估</h3>
+                <div class="meta">多源数据融合 · 碳损失模型 · 结果交付与核查 · 政策支撑</div>
+              </div>
+            </a>
+            <a class="item" href="projects/powerline-wildfire-risk.html">
+              <span class="dot" aria-hidden="true"></span>
+              <div>
+                <h3>配电线火灾风险：多因子预报与业务部署</h3>
+                <div class="meta">蔓延/资产风险层 · 云量/火点算法 · 四川/重庆报告与上线</div>
+              </div>
+            </a>
+          </div>
+        </section>
+
+        <!-- 更新 / 最近动态（可选） -->
+        <section class="section" id="updates" aria-labelledby="updates-title">
+          <h2 id="updates-title">最近更新</h2>
+          <div class="list">
+            <a class="item" href="posts/2025-09-01-fire-pipeline.html">
+              <span class="dot" aria-hidden="true"></span>
+              <div>
+                <h3>火险流水线 V3：概率映射与等级标准调整</h3>
+                <div class="meta">算法记要 · 概率→等级分箱 · 前端热力可视化</div>
+              </div>
+            </a>
+            <a class="item" href="posts/2025-08-20-fy4b-cloud-snow.html">
+              <span class="dot" aria-hidden="true"></span>
+              <div>
+                <h3>FY4B 云/雪判别的小改动：阈值到弱监督</h3>
+                <div class="meta">时窗约束 · 裂窗通道组合 · 误检分析</div>
+              </div>
+            </a>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <footer>
+      © 2025 易文星 · 技术与学术主页
+    </footer>
+  </div>
+</body>
+</html>
