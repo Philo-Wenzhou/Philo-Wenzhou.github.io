@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>机器学习模型部署平台 | 程序员Ben的项目</title>
+  <meta name="description" content="一个简化机器学习模型部署流程的平台，支持一键部署、监控和管理模型，降低模型上线门槛。" />
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <a href="../index.html" class="back">← 返回主页</a>
+  <div class="wrapper">
+    <header>
+      <h1>机器学习模型部署平台</h1>
+      <p style="color: var(--muted);">Python + FastAPI + Docker | 模型部署与管理</p>
+    </header>
+    
+    <div class="project-content">
+      <p>喵呜~ 我是Ben，这是我开发的第二个重要项目：机器学习模型部署平台。这个平台的目的是让数据科学家和开发者能够更轻松地将训练好的机器学习模型部署到生产环境中，无需关心复杂的基础设施和部署细节。</p>
+      
+      <!-- 项目概览 -->
+      <h2>项目概览</h2>
+      <p>机器学习模型部署是将AI研究成果转化为实际应用的关键环节，但这一过程往往充满挑战：</p>
+      <ul>
+        <li>部署环境配置复杂，需要专业的DevOps知识</li>
+        <li>模型版本管理困难，难以回滚到之前的版本</li>
+        <li>缺乏统一的模型监控和性能评估工具</li>
+        <li>不同框架的模型部署方式不统一</li>
+      </ul>
+      <p>我们的平台旨在解决这些问题，提供一个简单、高效、可扩展的模型部署解决方案。</p>
+      
+      <!-- 技术栈 -->
+      <h2>技术栈</h2>
+      <div class="tech-stack">
+        <span class="tech-item">Python</span>
+        <span class="tech-item">FastAPI</span>
+        <span class="tech-item">Docker</span>
+        <span class="tech-item">Kubernetes</span>
+        <span class="tech-item">TensorFlow</span>
+        <span class="tech-item">PyTorch</span>
+        <span class="tech-item">scikit-learn</span>
+        <span class="tech-item">MongoDB</span>
+        <span class="tech-item">Redis</span>
+        <span class="tech-item">Prometheus</span>
+        <span class="tech-item">Grafana</span>
+      </div>
+      
+      <!-- 系统架构 -->
+      <h2>系统架构</h2>
+      <p>平台采用微服务架构，主要包括以下几个核心组件：</p>
+      <ol>
+        <li><strong>API网关</strong>：处理用户请求，进行路由和认证</li>
+        <li><strong>模型管理服务</strong>：管理模型的生命周期，包括上传、版本控制、删除等</li>
+        <li><strong>部署服务</strong>：负责模型的容器化和部署</li>
+        <li><strong>监控服务</strong>：收集模型性能指标，进行健康检查</li>
+        <li><strong>存储服务</strong>：存储模型文件和元数据</li>
+        <li><strong>用户服务</strong>：管理用户账户和权限</li>
+      </ol>
+      <p>系统架构图如下（示意图）：</p>
+      <div style="text-align: center; margin: 20px 0;">
+        <svg width="700" height="400" viewBox="0 0 700 400" xmlns="http://www.w3.org/2000/svg">
+          <!-- API网关 -->
+          <rect x="250" y="30" width="200" height="60" rx="10" ry="10" fill="#e8dcc5" stroke="#8b4513" stroke-width="2"/>
+          <text x="350" y="65" font-family="Arial" font-size="16" text-anchor="middle" fill="#8b4513" font-weight="bold">API网关</text>
+          <text x="350" y="85" font-family="Arial" font-size="14" text-anchor="middle" fill="#3d2b1f">请求路由与认证</text>
+          
+          <!-- 核心服务层 -->
+          <rect x="100" y="120" width="150" height="80" rx="10" ry="10" fill="#e8dcc5" stroke="#8b4513" stroke-width="2"/>
+          <text x="175" y="150" font-family="Arial" font-size="14" text-anchor="middle" fill="#8b4513" font-weight="bold">模型管理服务</text>
+          <text x="175" y="170" font-family="Arial" font-size="12" text-anchor="middle" fill="#3d2b1f">模型生命周期管理</text>
+          
+          <rect x="325" y="120" width="150" height="80" rx="10" ry="10" fill="#e8dcc5" stroke="#8b4513" stroke-width="2"/>
+          <text x="400" y="150" font-family="Arial" font-size="14" text-anchor="middle" fill="#8b4513" font-weight="bold">部署服务</text>
+          <text x="400" y="170" font-family="Arial" font-size="12" text-anchor="middle" fill="#3d2b1f">容器化与部署</text>
+          
+          <rect x="550" y="120" width="150" height="80" rx="10" ry="10" fill="#e8dcc5" stroke="#8b4513" stroke-width="2"/>
+          <text x="625" y="150" font-family="Arial" font-size="14" text-anchor="middle" fill="#8b4513" font-weight="bold">监控服务</text>
+          <text x="625" y="170" font-family="Arial" font-size="12" text-anchor="middle" fill="#3d2b1f">性能监控与健康检查</text>
+          
+          <!-- 存储层 -->
+          <rect x="100" y="240" width="150" height="80" rx="10" ry="10" fill="#e8dcc5" stroke="#8b4513" stroke-width="2"/>
+          <text x="175" y="270" font-family="Arial" font-size="14" text-anchor="middle" fill="#8b4513" font-weight="bold">存储服务</text>
+          <text x="175" y="290" font-family="Arial" font-size="12" text-anchor="middle" fill="#3d2b1f">模型文件与元数据</text>
+          
+          <rect x="325" y="240" width="150" height="80" rx="10" ry="10" fill="#e8dcc5" stroke="#8b4513" stroke-width="2"/>
+          <text x="400" y="270" font-family="Arial" font-size="14" text-anchor="middle" fill="#8b4513" font-weight="bold">用户服务</text>
+          <text x="400" y="290" font-family="Arial" font-size="12" text-anchor="middle" fill="#3d2b1f">账户与权限管理</text>
+          
+          <!-- 基础设施层 -->
+          <rect x="50" y="350" width="600" height="40" rx="10" ry="10" fill="#e8dcc5" stroke="#8b4513" stroke-width="2"/>
+          <text x="350" y="375" font-family="Arial" font-size="14" text-anchor="middle" fill="#8b4513" font-weight="bold">基础设施 (Docker + Kubernetes)</text>
+          
+          <!-- 连接线 -->
+          <line x1="350" y1="90" x2="350" y2="120" stroke="#8b4513" stroke-width="2" marker-end="url(#arrowhead)"/>
+          <line x1="350" y1="90" x2="175" y2="120" stroke="#8b4513" stroke-width="2" marker-end="url(#arrowhead)"/>
+          <line x1="350" y1="90" x2="625" y2="120" stroke="#8b4513" stroke-width="2" marker-end="url(#arrowhead)"/>
+          
+          <line x1="175" y1="200" x2="175" y2="240" stroke="#8b4513" stroke-width="2" marker-end="url(#arrowhead)"/>
+          <line x1="400" y1="200" x2="400" y2="240" stroke="#8b4513" stroke-width="2" marker-end="url(#arrowhead)"/>
+          <line x1="625" y1="200" x2="325" y2="290" stroke="#8b4513" stroke-width="2" marker-end="url(#arrowhead)"/>
+          <line x1="100" y1="280" x2="100" y2="350" stroke="#8b4513" stroke-width="2" marker-end="url(#arrowhead)"/>
+          <line x1="325" y1="280" x2="325" y2="350" stroke="#8b4513" stroke-width="2" marker-end="url(#arrowhead)"/>
+          <line x1="550" y1="160" x2="550" y2="350" stroke="#8b4513" stroke-width="2" marker-end="url(#arrowhead)"/>
+          
+          <!-- 箭头标记 -->
+          <defs>
+            <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+              <polygon points="0 0, 10 3.5, 0 7" fill="#8b4513"/>
+            </marker>
+          </defs>
+        </svg>
+      </div>
+      
+      <!-- 主要功能 -->
+      <h2>主要功能</h2>
+      
+      <div class="feature-card">
+        <h4>1. 模型上传与版本管理</h4>
+        <p>支持多种框架的模型上传，包括TensorFlow、PyTorch、scikit-learn等，并自动进行版本管理，方便回溯和切换模型版本。</p>
+        <div class="example">
+          <h4>模型上传API示例：</h4>
+          <pre><code>from fastapi import FastAPI, UploadFile, File, Form, Depends
+from fastapi.responses import JSONResponse
+from models import Model, ModelVersion, User
+from auth import get_current_user
+import os
+import uuid
+from datetime import datetime
+
+app = FastAPI(title="ML Model Deployment Platform")
+
+@app.post("/api/models/upload", tags=["模型管理"])
+async def upload_model(
+    name: str = Form(...),
+    description: str = Form(...),
+    framework: str = Form(...),
+    model_file: UploadFile = File(...),
+    current_user: User = Depends(get_current_user)
+):
+    """上传机器学习模型"""
+    # 检查模型框架是否支持
+    supported_frameworks = ["tensorflow", "pytorch", "scikit-learn", "xgboost"]
+    if framework.lower() not in supported_frameworks:
+        return JSONResponse(
+            status_code=400,
+            content={"detail": f"不支持的模型框架，支持的框架有：{', '.join(supported_frameworks)}"}
+        )
+    
+    # 生成唯一的模型ID
+    model_id = str(uuid.uuid4())
+    
+    # 创建模型存储目录
+    model_dir = f"models/{model_id}"
+    os.makedirs(model_dir, exist_ok=True)
+    
+    # 保存模型文件
+    file_path = f"{model_dir}/{model_file.filename}"
+    with open(file_path, "wb") as f:
+        content = await model_file.read()
+        f.write(content)
+    
+    # 创建模型记录
+    new_model = Model(
+        id=model_id,
+        name=name,
+        description=description,
+        framework=framework,
+        owner_id=current_user.id,
+        created_at=datetime.now()
+    )
+    
+    # 保存到数据库
+    # db.add(new_model)
+    # db.commit()
+    
+    # 创建第一个版本
+    version = ModelVersion(
+        model_id=model_id,
+        version="1.0.0",
+        file_path=file_path,
+        created_at=datetime.now()
+    )
+    
+    # 保存版本记录
+    # db.add(version)
+    # db.commit()
+    
+    return {
+        "model_id": model_id,
+        "name": name,
+        "version": "1.0.0",
+        "message": "模型上传成功"
+    }</code></pre>
+        </div>
+      </div>
+      
+      <div class="feature-card">
+        <h4>2. 一键模型部署</h4>
+        <p>只需点击一个按钮，系统会自动处理容器化、服务配置和部署流程，将模型转换为可访问的REST API服务。</p>
+        <div class="example">
+          <h4>部署服务示例：</h4>
+          <pre><code>import docker
+import kubernetes.client as k8s_client
+import kubernetes.config as k8s_config
+import os
+import yaml
+from models import Deployment, Model
+
+class DeploymentService:
+    def __init__(self):
+        # 初始化Docker客户端
+        self.docker_client = docker.from_env()
+        
+        # 加载Kubernetes配置
+        try:
+            k8s_config.load_kube_config()
+        except Exception:
+            # 在容器中运行时使用incluster配置
+            k8s_config.load_incluster_config()
+        
+        self.k8s_apps_v1 = k8s_client.AppsV1Api()
+        self.k8s_core_v1 = k8s_client.CoreV1Api()
+    
+    def create_model_container(self, model: Model):
+        """为模型创建Docker容器"""
+        # 选择基础镜像
+        base_images = {
+            "tensorflow": "tensorflow/serving:latest",
+            "pytorch": "pytorch/pytorch:latest",
+            "scikit-learn": "python:3.9-slim",
+            "xgboost": "python:3.9-slim"
+        }
+        
+        base_image = base_images.get(model.framework.lower(), "python:3.9-slim")
+        
+        # 创建临时Dockerfile
+        dockerfile_content = f"""
+        FROM {base_image}
+        WORKDIR /app
+        COPY models/{model.id} /app/model
+        COPY deployment_scripts/{model.framework}/ /app/
+        RUN pip install -r requirements.txt
+        EXPOSE 8000
+        CMD ["python", "serve.py"]
+        """
+        
+        # 写入Dockerfile
+        with open("temp/Dockerfile", "w") as f:
+            f.write(dockerfile_content)
+        
+        # 构建镜像
+        image_tag = f"ml-model-{model.id}:latest"
+        self.docker_client.images.build(path="temp", tag=image_tag)
+        
+        # 推送镜像到仓库
+        # self.docker_client.images.push("registry.example.com", tag=image_tag)
+        
+        return image_tag
+    
+    def deploy_to_kubernetes(self, model: Model, image_tag: str):
+        """将模型部署到Kubernetes"""
+        # 准备部署配置
+        deployment_config = {
+            "apiVersion": "apps/v1",
+            "kind": "Deployment",
+            "metadata": {
+                "name": f"model-{model.id}",
+                "labels": {
+                    "app": "ml-model",
+                    "model-id": model.id
+                }
+            },
+            "spec": {
+                "replicas": 1,
+                "selector": {
+                    "matchLabels": {
+                        "app": "ml-model",
+                        "model-id": model.id
+                    }
+                },
+                "template": {
+                    "metadata": {
+                        "labels": {
+                            "app": "ml-model",
+                            "model-id": model.id
+                        }
+                    },
+                    "spec": {
+                        "containers": [
+                            {
+                                "name": f"model-{model.id}",
+                                "image": image_tag,
+                                "ports": [
+                                    {"containerPort": 8000}
+                                ],
+                                "resources": {
+                                    "requests": {
+                                        "memory": "512Mi",
+                                        "cpu": "500m"
+                                    },
+                                    "limits": {
+                                        "memory": "1Gi",
+                                        "cpu": "1"
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                }
+            }
+        }
+        
+        # 创建部署
+        self.k8s_apps_v1.create_namespaced_deployment(
+            namespace="ml-models",
+            body=deployment_config
+        )
+        
+        # 创建Service
+        service_config = {
+            "apiVersion": "v1",
+            "kind": "Service",
+            "metadata": {
+                "name": f"model-{model.id}",
+                "labels": {
+                    "app": "ml-model",
+                    "model-id": model.id
+                }
+            },
+            "spec": {
+                "selector": {
+                    "app": "ml-model",
+                    "model-id": model.id
+                },
+                "ports": [
+                    {
+                        "port": 80,
+                        "targetPort": 8000,
+                        "protocol": "TCP"
+                    }
+                ],
+                "type": "ClusterIP"
+            }
+        }
+        
+        self.k8s_core_v1.create_namespaced_service(
+            namespace="ml-models",
+            body=service_config
+        )
+        
+        return f"http://model-{model.id}.ml-models.svc.cluster.local"
+    
+    def deploy_model(self, model_id: str):
+        """部署模型的主函数"""
+        # 从数据库获取模型信息
+        # model = db.query(Model).filter(Model.id == model_id).first()
+        
+        # 创建模型容器
+        image_tag = self.create_model_container(model)
+        
+        # 部署到Kubernetes
+        endpoint = self.deploy_to_kubernetes(model, image_tag)
+        
+        # 创建部署记录
+        deployment = Deployment(
+            model_id=model_id,
+            endpoint=endpoint,
+            status="deploying",
+            created_at=datetime.now()
+        )
+        
+        # 保存部署记录
+        # db.add(deployment)
+        # db.commit()
+        
+        return endpoint</code></pre>
+        </div>
+      </div>
+      
+      <div class="feature-card">
+        <h4>3. 模型监控与性能分析</h4>
+        <p>实时监控模型的推理性能、吞吐量、延迟等指标，自动生成性能报告，帮助用户了解模型在生产环境中的表现。</p>
+      </div>
+      
+      <div class="feature-card">
+        <h4>4. A/B测试支持</h4>
+        <p>支持在生产环境中对不同版本的模型进行A/B测试，通过流量分配和效果对比，选择最优模型。</p>
+      </div>
+      
+      <div class="feature-card">
+        <h4>5. 自动伸缩</h4>
+        <p>根据模型的请求量和系统负载，自动调整部署的实例数量，确保服务的稳定性和高可用性。</p>
+      </div>
+      
+      <!-- 项目结构 -->
+      <h2>项目结构</h2>
+      <p>项目采用模块化的组织结构，便于维护和扩展：</p>
+      <pre><code>ml-deployment-platform/
+├── api/                    # API服务
+│   ├── main.py             # 应用入口
+│   ├── routers/            # API路由
+│   │   ├── model_routes.py # 模型相关路由
+│   │   ├── deployment_routes.py # 部署相关路由
+│   │   ├── user_routes.py  # 用户相关路由
+│   │   └── monitor_routes.py # 监控相关路由
+│   ├── models/             # 数据模型
+│   ├── services/           # 业务服务
+│   ├── utils/              # 工具函数
+│   └── config.py           # 配置文件
+├── frontend/               # 前端UI（计划中）
+├── deployment_scripts/     # 模型部署脚本
+│   ├── tensorflow/
+│   ├── pytorch/
+│   ├── scikit-learn/
+│   └── xgboost/
+├── monitoring/             # 监控相关组件
+│   ├── prometheus_config/
+│   └── grafana_dashboards/
+├── kubernetes/             # Kubernetes配置
+│   ├── manifests/
+│   └── helm_charts/
+├── tests/                  # 测试代码
+│   ├── unit_tests/
+│   └── integration_tests/
+├── docs/                   # 项目文档
+└── docker-compose.yml      # Docker Compose配置</code></pre>
+      
+      <!-- 部署说明 -->
+      <h2>部署说明</h2>
+      <p>平台本身也支持容器化部署，可以通过Docker Compose快速启动整个平台：</p>
+      <div class="example">
+        <h4>Docker Compose配置示例：</h4>
+        <pre><code>version: '3.8'
+
+services:
+  api:
+    build: ./api
+    ports:
+      - "8000:8000"
+    depends_on:
+      - mongodb
+      - redis
+    environment:
+      - MONGO_URI=mongodb://mongodb:27017/ml_platform
+      - REDIS_URL=redis://redis:6379/0
+      - DOCKER_HOST=unix:///var/run/docker.sock
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./models:/app/models
+  
+  mongodb:
+    image: mongo:5.0
+    volumes:
+      - mongo_data:/data/db
+    ports:
+      - "27017:27017"
+  
+  redis:
+    image: redis:6.0
+    volumes:
+      - redis_data:/data
+    ports:
+      - "6379:6379"
+  
+  prometheus:
+    image: prom/prometheus:latest
+    volumes:
+      - ./monitoring/prometheus_config:/etc/prometheus/
+      - prometheus_data:/prometheus
+    ports:
+      - "9090:9090"
+  
+  grafana:
+    image: grafana/grafana:latest
+    depends_on:
+      - prometheus
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./monitoring/grafana_dashboards:/var/lib/grafana/dashboards
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+
+volumes:
+  mongo_data:
+  redis_data:
+  prometheus_data:
+  grafana_data:</code></pre>
+      </div>
+      
+      <h3>使用步骤</h3>
+      <ol>
+        <li>克隆项目代码</li>
+        <li>启动Docker服务</li>
+        <li>运行<code class="code">docker-compose up -d</code>启动所有服务</li>
+        <li>访问<code class="code">http://localhost:8000/docs</code>查看API文档</li>
+        <li>使用API上传和部署模型</li>
+      </ol>
+      
+      <!-- 后续改进方向 -->
+      <h2>后续改进方向</h2>
+      <p>项目还有很多可以完善的地方：</p>
+      <ul>
+        <li>开发Web UI界面，提升用户体验</li>
+        <li>支持更多机器学习框架</li>
+        <li>增加模型自动更新和回滚功能</li>
+        <li>开发模型解释性工具，提高模型透明度</li>
+        <li>增加模型安全防护措施，防止 adversarial attacks</li>
+        <li>提供模型性能优化建议</li>
+      </ul>
+      
+      <div class="tip">
+        <strong>Ben的项目心得：</strong><br>
+        开发这个平台让我深入了解了机器学习工程化的各个环节，特别是在容器化和云原生部署方面学到了很多。我发现，将模型从实验室环境部署到生产环境，需要考虑的不仅仅是模型本身的性能，还包括可用性、可扩展性、安全性等多个方面。这个项目也让我意识到，一个好的工具可以极大地提高工作效率，让数据科学家专注于模型研发，而不是被部署和运维工作分心。
+      </div>
+      
+      <!-- 访问链接 -->
+      <a href="https://ml-deployment.example.com" class="call-to-action" target="_blank">访问在线演示</a>
+    </div>
+    
+    <footer>
+      © 2025 程序员Ben的项目 | 用爪子敲代码的狸花猫出品
+    </footer>
+  </div>
+</body>
+</html>

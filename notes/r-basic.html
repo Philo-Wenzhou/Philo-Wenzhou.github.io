@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>R语言基础：数据类型与数据结构详解 | 程序员Ben的学习笔记</title>
+  <meta name="description" content="详细介绍R语言中的基本数据类型与数据结构，包括vector、list、data.frame等，附带实战示例。" />
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <a href="../index.html" class="back">← 返回主页</a>
+  <div class="wrapper">
+    <header>
+      <h1>R语言基础：数据类型与数据结构详解</h1>
+      <p style="color: var(--muted);">发布于：2025年9月8日 | 作者：程序员Ben（用爪子敲代码的狸花猫）</p>
+    </header>
+    
+    <div class="note-content">
+      <p>大家好，我是Ben，一只正在学习编程的狸花猫。今天我要和大家分享R语言中的基本数据类型与数据结构。作为数据分析和统计计算的强大工具，R语言的数据结构设计非常灵活，掌握这些基础知识对于后续的数据分析工作至关重要。</p>
+      
+      <h2>1. 基本数据类型</h2>
+      <p>R语言中的基本数据类型主要包括以下几种：</p>
+      
+      <h3>1.1 数值型（Numeric）</h3>
+      <p>数值型是R中最常用的数据类型，表示实数或整数。</p>
+      <div class="example">
+        <h4>示例代码：</h4>
+        <pre><code># 创建数值型变量
+x &lt;- 3.14
+y &lt;- 42  # 整数也会被存储为数值型
+
+# 查看数据类型
+class(x)  # 输出: "numeric"
+class(y)  # 输出: "numeric"
+
+# 数值计算
+result &lt;- x + y  # 45.14
+print(result)</code></pre>
+      </div>
+      
+      <h3>1.2 字符型（Character）</h3>
+      <p>字符型用于存储文本数据，需要用单引号或双引号括起来。</p>
+      <div class="example">
+        <h4>示例代码：</h4>
+        <pre><code># 创建字符型变量
+name &lt;- "Ben"
+language &lt;- 'R Programming'
+
+# 查看数据类型
+class(name)  # 输出: "character"
+
+# 字符串拼接
+message &lt;- paste(name, "is learning", language)  # "Ben is learning R Programming"
+print(message)</code></pre>
+      </div>
+      
+      <h3>1.3 逻辑型（Logical）</h3>
+      <p>逻辑型用于存储布尔值，只有TRUE和FALSE两个取值。</p>
+      <div class="example">
+        <h4>示例代码：</h4>
+        <pre><code># 创建逻辑型变量
+a &lt;- TRUE
+b &lt;- FALSE
+
+# 逻辑运算
+result1 &lt;- a &amp; b  # FALSE（逻辑与）
+result2 &lt;- a | b  # TRUE（逻辑或）
+result3 &lt;- !a     # FALSE（逻辑非）
+
+# 比较运算
+x &lt;- 10
+y &lt;- 5
+is_greater &lt;- x &gt; y  # TRUE</code></pre>
+      </div>
+      
+      <h3>1.4 因子型（Factor）</h3>
+      <p>因子型用于存储分类数据，可以表示有序或无序的分类变量。</p>
+      <div class="example">
+        <h4>示例代码：</h4>
+        <pre><code># 创建因子型变量
+cat_breeds &lt;- factor(c("LiHua", "Ragdoll", "Siamese", "LiHua", "British Shorthair"))
+
+# 查看因子水平
+levels(cat_breeds)  # 输出: "British Shorthair" "LiHua" "Ragdoll" "Siamese"
+
+# 创建有序因子
+education_levels &lt;- factor(c("小学", "高中", "本科", "硕士"), 
+                           levels = c("小学", "高中", "本科", "硕士"), 
+                           ordered = TRUE)</code></pre>
+      </div>
+      
+      <h2>2. 基本数据结构</h2>
+      <p>R语言提供了几种重要的数据结构来组织和存储数据：</p>
+      
+      <h3>2.1 向量（Vector）</h3>
+      <p>向量是R中最基本的数据结构，可以存储相同类型的多个元素。</p>
+      <div class="example">
+        <h4>示例代码：</h4>
+        <pre><code># 创建数值型向量
+numbers &lt;- c(1, 2, 3, 4, 5)
+
+# 创建字符型向量
+fruits &lt;- c("苹果", "香蕉", "橙子", "葡萄")
+
+# 创建逻辑型向量
+logical_vector &lt;- c(TRUE, FALSE, TRUE, TRUE)
+
+# 向量索引（R的索引从1开始）
+first_element &lt;- numbers[1]  # 1
+last_element &lt;- numbers[length(numbers)]  # 5
+
+# 向量运算
+doubled_numbers &lt;- numbers * 2  # c(2, 4, 6, 8, 10)</code></pre>
+      </div>
+      
+      <h3>2.2 矩阵（Matrix）</h3>
+      <p>矩阵是二维的数据结构，所有元素必须是相同类型。</p>
+      <div class="example">
+        <h4>示例代码：</h4>
+        <pre><code># 创建矩阵
+matrix_data &lt;- matrix(1:9, nrow = 3, ncol = 3)
+
+# 查看矩阵
+print(matrix_data)
+# 输出:
+#      [,1] [,2] [,3]
+# [1,]    1    4    7
+# [2,]    2    5    8
+# [3,]    3    6    9
+
+# 带行列名的矩阵
+cat_matrix &lt;- matrix(c(5, 7, 3, 9), nrow = 2, ncol = 2, 
+                     dimnames = list(c("LiHua", "Ragdoll"), c("体重", "年龄")))
+print(cat_matrix)</code></pre>
+      </div>
+      
+      <h3>2.3 数据框（Data Frame）</h3>
+      <p>数据框是最常用的数据结构，类似于Excel表格，可以存储不同类型的列。</p>
+      <div class="example">
+        <h4>示例代码：</h4>
+        <pre><code># 创建数据框
+cat_data &lt;- data.frame(
+  name = c("Ben", "Momo", "Lucky", "Coco"),
+  breed = c("LiHua", "Ragdoll", "British Shorthair", "Siamese"),
+  age = c(0.75, 1.2, 2, 1.5),  # 年龄（岁）
+  weight = c(4.2, 5.8, 6.5, 4.9)  # 体重（kg）
+)
+
+# 查看数据框
+print(cat_data)
+
+# 访问数据框列
+b weights &lt;- cat_data$weight
+names &lt;- cat_data[["name"]]
+
+# 数据框基本操作
+head(cat_data)  # 查看前几行
+summary(cat_data)  # 数据摘要统计</code></pre>
+      </div>
+      
+      <h3>2.4 列表（List）</h3>
+      <p>列表是最灵活的数据结构，可以存储不同类型的对象，包括向量、矩阵、数据框甚至其他列表。</p>
+      <div class="example">
+        <h4>示例代码：</h4>
+        <pre><code># 创建列表
+cat_profile &lt;- list(
+  name = "Ben",
+  breed = "LiHua",
+  stats = c(age = 0.75, weight = 4.2),
+  favorite_foods = c("fish", "chicken", "milk"),
+  health_record = data.frame(
+    date = c("2025-08-01", "2025-09-01"),
+    checkup = c("正常", "正常")
+  )
+)
+
+# 访问列表元素
+cat_name &lt;- cat_profile$name  # "Ben"
+favorite_food &lt;- cat_profile[["favorite_foods"]][1]  # "fish"
+
+# 添加新元素到列表
+cat_profile$hobbies &lt;- c("coding", "sleeping", "playing")</code></pre>
+      </div>
+      
+      <h2>3. 数据导入与导出</h2>
+      <p>在实际数据分析工作中，我们经常需要从外部文件导入数据或导出分析结果。</p>
+      
+      <h3>3.1 导入CSV文件</h3>
+      <div class="example">
+        <h4>示例代码：</h4>
+        <pre><code># 导入CSV文件（注意文件路径）
+data &lt;- read.csv("data/cat_data.csv", header = TRUE)
+
+# 导入带中文字符的CSV文件
+data &lt;- read.csv("data/cat_data.csv", header = TRUE, fileEncoding = "UTF-8")
+
+# 指定列的数据类型
+data &lt;- read.csv("data/cat_data.csv", header = TRUE, 
+                 colClasses = c("character", "factor", "numeric", "numeric"))</code></pre>
+      </div>
+      
+      <h3>3.2 导出数据</h3>
+      <div class="example">
+        <h4>示例代码：</h4>
+        <pre><code># 导出为CSV文件
+write.csv(cat_data, "output/cat_data_processed.csv", row.names = FALSE)
+
+# 导出为R数据文件（.RData）
+save(cat_data, file = "output/cat_data.RData")
+
+# 从R数据文件加载数据
+load("output/cat_data.RData")</code></pre>
+      </div>
+      
+      <div class="tip">
+        <strong>Ben的学习小提示：</strong><br>
+        1. 在R中，向量是最基础的数据结构，许多操作都基于向量进行。<br>
+        2. 数据框是数据分析中使用最多的数据结构，类似于Excel表格。<br>
+        3. 学习R时，要注意R的索引是从1开始的，这与许多编程语言（如Python）不同。<br>
+        4. 对于大型数据集，建议使用<code>data.table</code>包来提高处理效率。
+      </div>
+      
+      <h2>4. 实战练习</h2>
+      <p>现在，让我们通过一个简单的练习来巩固所学的知识：</p>
+      <div class="example">
+        <h4>练习任务：</h4>
+        <p>创建一个包含5只猫咪信息的数据框，包括姓名、品种、年龄和体重，然后：</p>
+        <ol>
+          <li>计算所有猫咪的平均年龄和平均体重</li>
+          <li>筛选出年龄大于1岁的猫咪</li>
+          <li>按体重从小到大排序</li>
+          <li>将结果导出为CSV文件</li>
+        </ol>
+        
+        <h4>参考答案：</h4>
+        <pre><code># 创建数据框
+cat_exercise &lt;- data.frame(
+  name = c("Ben", "Momo", "Lucky", "Coco", "Max"),
+  breed = c("LiHua", "Ragdoll", "British Shorthair", "Siamese", "Persian"),
+  age = c(0.75, 1.2, 2, 1.5, 3),
+  weight = c(4.2, 5.8, 6.5, 4.9, 7.2)
+)
+
+# 计算平均年龄和平均体重
+avg_age &lt;- mean(cat_exercise$age)
+avg_weight &lt;- mean(cat_exercise$weight)
+print(paste("平均年龄：", round(avg_age, 2), "岁"))
+print(paste("平均体重：", round(avg_weight, 2), "kg"))
+
+# 筛选出年龄大于1岁的猫咪
+older_cats &lt;- cat_exercise[cat_exercise$age &gt; 1, ]
+print("年龄大于1岁的猫咪：")
+print(older_cats)
+
+# 按体重从小到大排序
+sorted_cats &lt;- cat_exercise[order(cat_exercise$weight), ]
+print("按体重排序的猫咪：")
+print(sorted_cats)
+
+# 导出为CSV文件
+write.csv(sorted_cats, "output/sorted_cats.csv", row.names = FALSE)</code></pre>
+      </div>
+      
+      <h2>5. 总结</h2>
+      <p>掌握R语言的基本数据类型和数据结构是进行数据分析的基础。在本笔记中，我们学习了：</p>
+      <ul>
+        <li>基本数据类型：数值型、字符型、逻辑型、因子型</li>
+        <li>基本数据结构：向量、矩阵、数据框、列表</li>
+        <li>数据导入与导出的方法</li>
+        <li>通过实战练习巩固了所学知识</li>
+      </ul>
+      <p>希望这篇笔记对正在学习R语言的小伙伴们有所帮助！如果有任何问题或建议，欢迎在评论区留言。</p>
+      <p>下一篇笔记，我将介绍R语言中的数据清洗和预处理技巧，敬请期待！</p>
+    </div>
+    
+    <footer>
+      © 2025 程序员Ben的学习笔记 | 用爪子敲代码的狸花猫出品
+    </footer>
+  </div>
+</body>
+</html>
