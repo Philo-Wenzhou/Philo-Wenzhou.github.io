@@ -1,0 +1,18 @@
+body { font-family: 'Microsoft YaHei', Arial, sans-serif; background: #f8f9fb; margin: 0; padding: 0;}
+header { background: #357ca5; color: #fff; padding: 24px 0; text-align: center;}
+nav { margin-top: 14px; }
+nav a { color: #fff; margin: 0 18px; text-decoration: none; font-weight: 500;}
+nav a:hover { text-decoration: underline; }
+main { max-width: 800px; margin: 30px auto; padding: 0 18px; }
+section { background: #fff; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,.04); margin-bottom: 32px; padding: 24px;}
+.avatar { float: left; width: 90px; height: 90px; border-radius: 50%; margin-right: 24px; }
+h2 { margin-top: 0; color: #357ca5;}
+#notes ul { list-style: none; padding: 0; }
+#notes li { margin-bottom: 22px; }
+#notes .date { color: #888; font-size: 0.97em; margin-left: 12px;}
+footer { text-align: center; color: #888; margin: 40px 0 18px 0; font-size: 0.97em;}
+@media (max-width: 600px) {
+    .avatar { float: none; display: block; margin: 0 auto 18px auto;}
+    main { padding: 0 4px; }
+    section { padding: 14px;}
+}
