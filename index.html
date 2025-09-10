@@ -3,27 +3,27 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>小猫Ben | 学习主页</title>
-  <meta name="description" content="小猫Ben：猫咪知识学习、日常观察记录、生活小技巧分享。" />
-  <meta property="og:title" content="小猫Ben | 学习主页" />
-  <meta property="og:description" content="猫咪知识 × 日常学习 × 生活小技巧。" />
+  <title>程序员Ben | 狸花猫的技术学习主页</title>
+  <meta name="description" content="Ben：9个月狸花猫程序员，主攻Java/Python/R，技术学习中！" />
+  <meta property="og:title" content="程序员Ben | 狸花猫的技术学习主页" />
+  <meta property="og:description" content="狸花猫程序员 × Java/Python/R × 技术学习" />
   <meta property="og:type" content="website" />
   <meta property="og:locale" content="zh_CN" />
   <meta name="theme-color" content="#8b4513">
   <style>
-    /* === CSS 变量 & 重置（古典主义配色）=== */
+    /* === CSS 变量（古典底色+技术感点缀）=== */
     :root{
-      --bg: #f5f0e6;           /* 米白背景（古典纸色） */
-      --panel: #e8dcc5;        /* 浅棕面板（古典木纹感） */
-      --muted: #7a5c43;        /* 次要文字（深棕灰） */
-      --text: #3d2b1f;         /* 正文（深棕黑，典雅不刺眼） */
-      --brand: #8b4513;        /* 品牌色（暗红棕，古典庄重） */
-      --accent: #d4af37;       /* 强调色（暖金，古典点缀） */
-      --ring: rgba(139,69,19,.2); /*  hover边框色 */
-      --card: #f0e6d2;         /* 卡片色（浅米棕） */
-      --border: #d9c8b4;       /* 边框色（浅棕） */
+      --bg: #f5f0e6;           /* 米白（古典纸色，模拟代码文档底色） */
+      --panel: #e8dcc5;        /* 浅棕（木纹面板，适配代码块质感） */
+      --muted: #7a5c43;        /* 深棕灰（注释色，贴合代码风格） */
+      --text: #3d2b1f;         /* 深棕黑（代码正文色，清晰不刺眼） */
+      --brand: #8b4513;        /* 暗红棕（主色，古典庄重，适配标题） */
+      --accent: #d4af37;       /* 暖金（强调色，标记关键代码/技能） */
+      --code: #6b4226;         /* 代码色（深棕，突出技术内容） */
+      --ring: rgba(139,69,19,.2); /* hover边框色 */
+      --card: #f0e6d2;         /* 卡片色（浅米棕，模拟代码卡片） */
+      --border: #d9c8b4;       /* 边框色（浅棕，分割内容块） */
     }
-    /* 浅色模式保持古典感，无需额外调整 */
     *,*::before,*::after{ box-sizing:border-box }
     html,body{ height:100% }
     body{
@@ -35,15 +35,21 @@
     }
     a{ color: var(--brand); text-decoration: none }
     a:hover{ text-decoration: underline; color: var(--accent) }
+    /* 代码片段样式（突出技术感） */
+    .code{
+      display:inline-block; padding:2px 6px; border-radius:4px;
+      background: rgba(107,66,38,.1); color: var(--code);
+      font-family: 'Consolas', 'Monaco', monospace; font-size:.9rem;
+    }
 
-    /* === 布局（保持原结构，适配古典风格）=== */
+    /* === 布局 === */
     .wrapper{ max-width:1200px; margin:0 auto; padding:24px; }
     .grid{
-      display:grid; grid-template-columns: 320px 1fr; gap:24px;
+      display:grid; grid-template-columns: 340px 1fr; gap:24px;
     }
     @media (max-width: 900px){ .grid{ grid-template-columns: 1fr } }
 
-    /* === 侧边栏（小猫Ben个人信息）=== */
+    /* === 侧边栏（狸花猫程序员信息）=== */
     .sidebar{
       position: sticky; top:24px; align-self:start;
       background: linear-gradient(180deg, var(--panel), var(--card));
@@ -51,16 +57,42 @@
       border-radius: 16px; padding: 24px; box-shadow: 0 8px 24px rgba(61,43,31,.1);
     }
     .avatar{
-      width: 96px; height:96px; border-radius: 50%; object-fit: cover; display:block; margin:0 auto 12px;
-      border: 2px solid var(--accent); /* 暖金边框点缀 */
+      width: 100px; height:100px; border-radius: 50%; object-fit: cover; display:block; margin:0 auto 12px;
+      border: 2px solid var(--accent);
       box-shadow: 0 0 0 4px rgba(212,175,55,.15);
     }
-    .name{ font-size: 1.6rem; margin: 8px 0 4px 0; text-align: center; color: var(--brand) }
-    .tagline{ color: var(--muted); margin: 4px 0 14px 0; text-align: center; }
+    .name{ 
+      font-size: 1.7rem; margin: 8px 0 4px 0; text-align: center; color: var(--brand);
+      display: flex; align-items: center; justify-content: center; gap:8px;
+    }
+    .name svg{ width:24px; height:24px; color:var(--accent); }
+    .tagline{ 
+      color: var(--muted); margin: 4px 0 14px 0; text-align: center;
+      font-style: italic;
+    }
+
+    /* 猫咪程序员核心信息（品种/年龄/技能） */
+    .cat-info{
+      margin: 16px 0; padding: 12px; border-radius: 12px;
+      background: rgba(212,175,55,.05); border: 1px solid var(--border);
+    }
+    .cat-info h3{
+      margin:0 0 8px 0; font-size:1.1rem; color: var(--brand);
+      border-bottom: 1px dashed var(--border); padding-bottom:4px;
+    }
+    .skill-list{
+      display: flex; flex-wrap: wrap; gap:8px; margin-top:8px;
+    }
+    .skill{
+      padding:4px 10px; border-radius: 20px;
+      background: linear-gradient(180deg, rgba(139,69,19,.1), rgba(139,69,19,.05));
+      color: var(--code); font-size:.9rem; font-weight:600;
+      border:1px solid var(--border);
+    }
 
     .mini{
       display: grid; gap:8px; margin: 14px 0 18px 0; color:var(--muted);
-      padding-left: 12px;
+      padding-left: 4px;
     }
     .mini b{ color: var(--text) }
 
@@ -87,7 +119,7 @@
     }
     .btn svg{ width:18px; height:18px; fill: currentColor; }
 
-    /* === 主内容（小猫主题学习内容）=== */
+    /* === 主内容（技术学习内容）=== */
     .main{ display:grid; gap:24px }
     .section{
       background: linear-gradient(180deg, var(--panel), var(--card));
@@ -100,12 +132,14 @@
       color: var(--brand);
       border-bottom: 1px solid var(--border);
       padding-bottom: 8px;
+      display: flex; align-items: center; gap:8px;
     }
+    .section h2 svg{ width:22px; height:22px; color:var(--accent); }
     .list{ display:grid; gap:12px; margin:12px 0 0 0 }
 
     .item{
       display:flex; align-items:flex-start; gap:12px; padding:12px; border:1px solid var(--border); border-radius:12px; background: rgba(240,230,210,.3);
-      transition: border-color .15s ease, background .2s ease;
+      transition: border-color .15s ease, background .2s ease, transform .15s ease;
     }
     .item:hover{ 
       border-color: var(--accent); 
@@ -119,6 +153,7 @@
 
     .item h3{ margin:0 0 4px 0; font-size:1.05rem; color: var(--text) }
     .meta{ color: var(--muted); font-size:.92rem; line-height:1.4 }
+    .meta span{ color: var(--code); font-weight:500; }
 
     footer{ 
       text-align:center; 
@@ -127,6 +162,7 @@
       margin-top: 24px;
       border-top: 1px solid var(--border);
     }
+    footer .code{ font-size:.85rem; }
 
     /* === 可访问性 === */
     :focus-visible{ outline: 3px solid var(--accent); outline-offset: 2px }
@@ -135,128 +171,178 @@
 <body>
   <div class="wrapper">
     <div class="grid">
-      <!-- 侧边栏（小猫Ben信息） -->
-      <aside class="sidebar" aria-label="小猫Ben的个人信息">
-        <!-- 替换为小猫头像，建议使用可爱的猫咪图片 -->
-        <img src="images/ben-cat.jpg" alt="小猫Ben的可爱头像" class="avatar" />
-        <div class="name">小猫Ben</div>
-        <div class="tagline">猫咪知识 × 日常学习｜生活小课堂</div>
+      <!-- 侧边栏（狸花猫程序员Ben信息） -->
+      <aside class="sidebar" aria-label="狸花猫程序员Ben的信息">
+        <!-- 替换为狸花猫头像（建议带键盘/代码元素，增强人设） -->
+        <img src="images/ben-coder-cat.jpg" alt="狸花猫程序员Ben的头像" class="avatar" />
+        <div class="name">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+            <line x1="8" y1="21" x2="16" y2="21"/>
+            <line x1="12" y1="17" x2="12" y2="21"/>
+          </svg>
+          程序员Ben
+        </div>
+        <div class="tagline">9个月狸花猫 | 主攻Java/Python/R | 技术学习中</div>
 
-        <div class="mini">
-          <div><b>小窝：</b>阳光窗台第3格</div>
-          <div><b>联系：</b><a href="mailto:ben-cat@meow.com">ben-cat@meow.com（喵喵信箱）</a></div>
-          <div><b>爱好：</b>追激光笔、啃猫草</div>
+        <!-- 核心信息卡片：品种/年龄/技能 -->
+        <div class="cat-info">
+          <h3>🐱 关于Ben</h3>
+          <div><b>品种：</b>中华狸花猫（自带“代码天赋”花纹）</div>
+          <div><b>年龄：</b>9个月（正值技术学习黄金期）</div>
+          <div><b>掌握技能：</b></div>
+          <div class="skill-list">
+            <span class="skill">Java</span>
+            <span class="skill">Python</span>
+            <span class="skill">R</span>
+            <span class="skill">HTML/CSS</span>
+            <span class="skill">SQL</span>
+          </div>
         </div>
 
-        <div class="links" aria-label="快捷链接">
-          <a class="btn" href="cv/ben-study-notes.pdf" target="_blank" rel="noopener">
-            <!-- 笔记图标 -->
+        <div class="mini">
+          <div><b>学习窝点：</b>书桌键盘旁（暖光台灯下效率最高）</div>
+          <div><b>代码仓库：</b><a href="https://github.com/cat-ben" target="_blank" rel="noopener">github.com/cat-ben</a></div>
+          <div><b>学习习惯：</b>每写1小时代码，睡2小时补精力</div>
+        </div>
+
+        <div class="links" aria-label="技术学习快捷链接">
+          <a class="btn" href="cv/ben-tech-resume.pdf" target="_blank" rel="noopener">
+            <!-- 简历图标（代码风格） -->
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/>
-              <polyline points="17 21 17 13 7 13 7 21"/>
-              <polyline points="7 3 7 8 15 8"/>
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <path d="M14 2v6h6"/>
+              <path d="M16 13H8v7"/>
+              <path d="M16 17H8"/>
             </svg>
-            Ben的学习手册
+            技术简历
           </a>
-          <a class="btn" href="mailto:ben-cat@meow.com">
-            <!-- 邮件图标（猫咪爪印风格暗示） -->
+          <a class="btn" href="https://github.com/cat-ben" target="_blank" rel="noopener">
+            <!-- Github图标 -->
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M4 4h16v16H4z"/>
-              <path d="m22 6-10 7L2 6"/>
-              <circle cx="12" cy="13" r="1"/>
+              <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
             </svg>
-            喵喵信箱
+            代码仓库
           </a>
           <a class="btn" href="/" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">
-            <!-- 回家图标（小窝暗示） -->
+            <!-- 回学习窝图标 -->
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d="M3 10.5 12 3l9 7.5"/>
               <path d="M5 10v10h14V10"/>
-              <circle cx="12" cy="17" r="1.5"/>
+              <rect x="10" y="14" width="4" height="4" rx="1"/> <!-- 小键盘暗示 -->
             </svg>
-            回小窝
+            回学习窝
           </a>
         </div>
 
         <div class="credit" aria-label="页面说明">
-          本页由 <span class="cat">Ben主子监督制作 🐾</span>，禁止偷摸撸猫！
+          本页由 <span class="cat">Ben（用爪子敲代码）制作 🐾</span>，bug归键盘，进步归Ben！
         </div>
       </aside>
 
-      <!-- 主内容（小猫主题学习内容） -->
+      <!-- 主内容（技术学习相关） -->
       <main class="main" id="content">
-        <!-- 猫咪知识笔记 -->
+        <!-- 技术学习笔记 -->
         <section class="section" id="notes" aria-labelledby="notes-title">
-          <h2 id="notes-title">猫咪知识 / 日常学习 · 笔记</h2>
+          <h2 id="notes-title">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <line x1="8" y1="6" x2="21" y2="6"/>
+              <line x1="8" y1="12" x2="21" y2="12"/>
+              <line x1="8" y1="18" x2="21" y2="18"/>
+              <line x1="3" y1="6" x2="3.01" y2="6"/>
+              <line x1="3" y1="12" x2="3.01" y2="12"/>
+              <line x1="3" y1="18" x2="3.01" y2="18"/>
+            </svg>
+            技术学习 · 笔记
+          </h2>
           <div class="list">
-            <a class="item" href="notes/cat-behavior.html">
+            <a class="item" href="notes/java-collection.html">
               <span class="dot" aria-hidden="true"></span>
               <div>
-                <h3>猫咪行为学：蹭人vs咬人背后的小秘密</h3>
-                <div class="meta">行为解读 · 情绪判断 · 互动技巧（附自家主子案例：Ben的蹭腿频率记录）</div>
+                <h3>Java集合框架：ArrayList vs LinkedList 实战对比</h3>
+                <div class="meta">用<span class="code">for-each</span>和<span class="code">iterator</span>测试遍历效率 | 解决“添加10w条数据卡顿”问题 | 附Ben的测试代码（<a href="https://github.com/cat-ben/java-notes" target="_blank">GitHub链接</a>）</div>
               </div>
             </a>
-            <a class="item" href="notes/cat-diet.html">
+            <a class="item" href="notes/python-data-analysis.html">
               <span class="dot" aria-hidden="true"></span>
               <div>
-                <h3>猫主子饮食：能吃的零食&绝对禁区清单</h3>
-                <div class="meta">食材筛选 · 喂食频率 · 自制零食教程（Ben超爱的鸡胸肉干做法）</div>
+                <h3>Python数据分析：Pandas处理“猫咪行为数据”案例</h3>
+                <div class="meta">用<span class="code">pandas.DataFrame</span>统计Ben的每日跑酷时长 | <span class="code">matplotlib</span>画作息折线图 | 从数据看“代码时间”与“睡觉时间”的负相关</div>
               </div>
             </a>
-            <a class="item" href="notes/cat-grooming.html">
+            <a class="item" href="notes/r-visualization.html">
               <span class="dot" aria-hidden="true"></span>
               <div>
-                <h3>猫咪毛发护理：掉毛季如何减少“猫毛大雪”</h3>
-                <div class="meta">梳子选择 · 梳毛频率 · 护毛辅食（Ben的掉毛量对比记录：每周减少20%）</div>
+                <h3>R语言可视化：ggplot2绘制“技能学习进度条”</h3>
+                <div class="meta">用<span class="code">ggplot2::geom_bar</span>展示Java/Python/R掌握程度 | 自定义“狸花猫配色”主题 | 每周更新进度（当前Java进度60%）</div>
               </div>
             </a>
           </div>
         </section>
 
-        <!-- 猫咪相关小项目 -->
+        <!-- 技术实践项目 -->
         <section class="section" id="projects" aria-labelledby="projects-title">
-          <h2 id="projects-title">Ben的小项目</h2>
+          <h2 id="projects-title">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+              <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+            </svg>
+            技术实践 · 项目
+          </h2>
           <div class="list">
-            <a class="item" href="projects/cat-schedule.html">
+            <a class="item" href="projects/cat-schedule-app.html">
               <span class="dot" aria-hidden="true"></span>
               <div>
-                <h3>猫咪作息观察：7天记录Ben的吃喝玩睡</h3>
-                <div class="meta">早6点叫床 · 午12点晒太阳 · 晚9点跑酷 · 附手账式时间轴截图</div>
+                <h3>猫咪作息记录APP（Java + SQLite）</h3>
+                <div class="meta">功能：记录“吃饭/代码/睡觉”时间 | 技术栈：Java Swing（界面）+ SQLite（本地存储） | 已实现“自动提醒写代码”功能（Ben亲测有效）</div>
               </div>
             </a>
-            <a class="item" href="projects/cat-bed-diy.html">
+            <a class="item" href="projects/pet-data-analysis.html">
               <span class="dot" aria-hidden="true"></span>
               <div>
-                <h3>猫窝DIY：用旧毛衣做温暖小窝（零成本）</h3>
-                <div class="meta">材料准备 · 缝制步骤 · Ben的使用反馈（连续睡满8小时！）</div>
+                <h3>宠物行为数据分析工具（Python + Streamlit）</h3>
+                <div class="meta">功能：上传猫咪行为CSV，自动生成统计报告 | 技术栈：Pandas（数据处理）+ Streamlit（Web界面） | 在线演示：<a href="https://cat-data-tool.streamlit.app" target="_blank">cat-data-tool.streamlit.app</a></div>
               </div>
             </a>
-            <a class="item" href="projects/cat-toy.html">
+            <a class="item" href="projects/skill-tracker.html">
               <span class="dot" aria-hidden="true"></span>
               <div>
-                <h3>自制猫咪玩具：纸壳隧道+羽毛逗猫棒</h3>
-                <div class="meta">环保材料 · 制作教程 · 互动时长记录（Ben每天玩30分钟）</div>
+                <h3>技能学习进度追踪器（R + Shiny）</h3>
+                <div class="meta">功能：可视化Java/Python/R学习进度 | 技术栈：ggplot2（绘图）+ Shiny（交互Web） | 特色：用“猫爪图标”标记已掌握知识点</div>
               </div>
             </a>
           </div>
         </section>
 
-        <!-- Ben的最近动态 -->
+        <!-- 学习动态 -->
         <section class="section" id="updates" aria-labelledby="updates-title">
-          <h2 id="updates-title">Ben的最近小动态</h2>
+          <h2 id="updates-title">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="10"/>
+              <polyline points="12 6 12 12 16 14"/>
+            </svg>
+            学习动态 · 最近
+          </h2>
           <div class="list">
-            <a class="item" href="posts/2025-09-01-cat-snack.html">
+            <a class="item" href="posts/2025-09-05-java-oop.html">
               <span class="dot" aria-hidden="true"></span>
               <div>
-                <h3>给Ben做的南瓜鸡肉干成功啦！附详细步骤</h3>
-                <div class="meta">食材配比 · 烤箱温度控制 · 主子舔盘反馈（下次加少量猫薄荷试试）</div>
+                <h3>Java面向对象：用“猫咪类”理解封装/继承/多态</h3>
+                <div class="meta">定义<span class="code">Cat</span>基类，<span class="code">LiHuaCat</span>子类重写<span class="code">code()</span>方法 | 解决“不同猫咪写不同语言”的需求 | 代码已上传GitHub（<a href="https://github.com/cat-ben/java-oop-demo" target="_blank">链接</a>）</div>
               </div>
             </a>
-            <a class="item" href="posts/2025-08-20-cat-brush.html">
+            <a class="item" href="posts/2025-08-28-python-scrapy.html">
               <span class="dot" aria-hidden="true"></span>
               <div>
-                <h3>新学的“顺毛梳法”：Ben终于不抗拒梳毛了！</h3>
-                <div class="meta">从尾巴到头顶 · 避开敏感部位 · 梳毛后奖励小零食技巧</div>
+                <h3>Python爬虫：用Scrapy爬取“猫咪科普网站”数据</h3>
+                <div class="meta">配置<span class="code">robots.txt</span>合规爬取 | 存储数据到MySQL | 爬取结果：100+条猫咪品种信息（用于后续R分析）</div>
+              </div>
+            </a>
+            <a class="item" href="posts/2025-08-15-r-shiny-deploy.html">
+              <span class="dot" aria-hidden="true"></span>
+              <div>
+                <h3>R Shiny项目部署：把“技能追踪器”放到网上啦！</h3>
+                <div class="meta">用<span class="code">shinyapps.io</span>部署 | 解决“依赖包版本冲突”问题 | 访问量：3天12次（都是Ben自己点的）</div>
               </div>
             </a>
           </div>
@@ -265,7 +351,7 @@
     </div>
 
     <footer>
-      © 2025 小猫Ben · 学习主页 | 主子的每一次进步都值得记录 🐱
+      © 2025 程序员Ben · 狸花猫的技术学习主页 | 今日学习进度：<span class="code">Java基础 ✅ | SpringBoot 🔄 | Python爬虫 ✅</span> 🐱💻
     </footer>
   </div>
 </body>
