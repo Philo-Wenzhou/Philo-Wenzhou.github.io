@@ -1,0 +1,63 @@
+
+title: "易文星 | 技术与学术主页"
+description: "生态学 × 数据科学 × 气象遥感建模｜持续更新的研究与工作笔记"
+url: "" # 填你的站点域名，比如 https://yourname.github.io
+baseurl: "" # 子路径，比如 /blog，如果没有就留空
+lang: zh-CN
+theme: null
+
+# GitHub Pages 允许的插件
+plugins:
+  - jekyll-seo-tag
+  - jekyll-sitemap
+  - jekyll-feed
+
+# 集合（Collections）设置
+collections:
+  notes:
+    output: true
+    permalink: /notes/:title/
+  projects:
+    output: true
+    permalink: /projects/:title/
+
+# Markdown & 高亮
+markdown: kramdown
+highlighter: rouge
+
+# 文章/页面默认 Front Matter
+defaults:
+  - scope: { path: "" }
+    values: { layout: default }
+  - scope: { path: "", type: notes }
+    values: { layout: note, toc: true }
+  - scope: { path: "", type: projects }
+    values: { layout: project }
+  - scope: { path: "", type: posts }
+    values: { layout: post }
+
+# 导航数据
+navigation: _data/nav.yml
+
+# RSS/Atom
+feed:
+  path: feed.xml
+
+# 站点生成排除
+exclude:
+  - README.md
+  - node_modules
+  - package.json
+  - package-lock.json
+
+# 自定义变量
+author:
+  name: "易文星"
+  email: "philoyiwenxing@163.com"
+
+# SEO
+seo:
+  type: "Person"
+  name: "易文星"
+  links:
+    - "mailto:philoyiwenxing@163.com"
