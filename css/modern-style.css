@@ -105,15 +105,15 @@ pre code{
 
 /* === 布局 === */
 .wrapper{
-  max-width:1200px;
+  max-width:1400px;
   margin:0 auto;
-  padding:20px;
+  padding:24px;
 }
 
 .grid{
   display:grid;
-  grid-template-columns: 340px 1fr;
-  gap:24px;
+  grid-template-columns: 360px 1fr;
+  gap:32px;
   min-height: calc(100vh - 120px);
 }
 
