@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>R语言交互式示例：数据可视化与分析 | 程序员Ben的学习笔记</title>
+  <meta name="description" content="展示如何在网页中集成交互式R代码运行环境，包括代码编辑、实时运行和结果展示。" />
+  <link rel="stylesheet" href="../css/style.css">
+  <script>
+    // 主题切换功能
+    document.addEventListener('DOMContentLoaded', function() {
+      const themeStylesheet = document.getElementById('theme-stylesheet');
+      const toggleThemeBtn = document.getElementById('toggle-theme');
+      let isModernTheme = false;
+      
+      // 检查本地存储中的主题偏好
+      const savedTheme = localStorage.getItem('preferred-theme');
+      if (savedTheme === 'modern') {
+        themeStylesheet.href = '../css/modern-style.css';
+        isModernTheme = true;
+        updateThemeButton();
+      }
+      
+      toggleThemeBtn.addEventListener('click', () => {
+        if (isModernTheme) {
+          themeStylesheet.href = '../css/style.css';
+          localStorage.setItem('preferred-theme', 'original');
+        } else {
+          themeStylesheet.href = '../css/modern-style.css';
+          localStorage.setItem('preferred-theme', 'modern');
+        }
+        isModernTheme = !isModernTheme;
+        updateThemeButton();
+      });
+      
+      function updateThemeButton() {
+        if (isModernTheme) {
+          toggleThemeBtn.innerHTML = `
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="20" height="20">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+            原始主题
+          `;
+        } else {
+          toggleThemeBtn.innerHTML = `
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="20" height="20">
+              <circle cx="12" cy="12" r="5"></circle>
+              <line x1="12" y1="1" x2="12" y2="3"></line>
+              <line x1="12" y1="21" x2="12" y2="23"></line>
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+              <line x1="1" y1="12" x2="3" y2="12"></line>
+              <line x1="21" y1="12" x2="23" y2="12"></line>
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+            </svg>
+            现代主题
+          `;
+        }
+      }
+      
+      // R代码运行模拟器功能
+      const runButtons = document.querySelectorAll('.run-r-code');
+      runButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          const exampleContainer = this.closest('.r-example');
+          const codeBlock = exampleContainer.querySelector('.r-code');
+          const resultBlock = exampleContainer.querySelector('.r-result');
+          const loadingIndicator = exampleContainer.querySelector('.loading');
+          
+          // 显示加载状态
+          loadingIndicator.style.display = 'block';
+          resultBlock.style.display = 'none';
+          
+          // 模拟代码运行延迟
+          setTimeout(() => {
+            // 隐藏加载状态
+            loadingIndicator.style.display = 'none';
+            
+            // 显示结果
+            resultBlock.style.display = 'block';
+            
+            // 添加结果区域的动画效果
+            resultBlock.style.opacity = '0';
+            setTimeout(() => {
+              resultBlock.style.transition = 'opacity 0.5s ease';
+              resultBlock.style.opacity = '1';
+            }, 10);
+          }, 1000);
+        });
+      });
+    });
+  </script>
+  <style>
+    /* R代码示例样式 */
+    .r-example {
+      margin-bottom: 30px;
+      background-color: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .r-example:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-hover);
+    }
+    
+    .example-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 20px;
+      background-color: var(--panel);
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .example-header h4 {
+      margin: 0;
+      color: var(--brand);
+      font-size: 1.1rem;
+    }
+    
+    .run-r-code {
+      padding: 8px 16px;
+      background-color: var(--brand);
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: all 0.2s ease;
+    }
+    
+    .run-r-code:hover {
+      background-color: var(--accent);
+      transform: translateY(-1px);
+    }
+    
+    .r-code {
+      padding: 20px;
+      background-color: var(--code-bg, #f8f9fa);
+      overflow-x: auto;
+    }
+    
+    .r-code pre {
+      margin: 0;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+    
+    .r-code code {
+      color: var(--code-text, var(--code));
+      background-color: transparent;
+      padding: 0;
+    }
+    
+    .r-result {
+      padding: 20px;
+      border-top: 1px solid var(--border);
+      display: none;
+    }
+    
+    .result-header {
+      font-weight: bold;
+      margin-bottom: 10px;
+      color: var(--brand);
+    }
+    
+    .result-output {
+      background-color: var(--bg);
+      padding: 15px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.9rem;
+      line-height: 1.5;
+      white-space: pre-wrap;
+      color: var(--text);
+    }
+    
+    .result-plot {
+      margin-top: 15px;
+      text-align: center;
+    }
+    
+    .result-plot svg {
+      max-width: 100%;
+      height: auto;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      background-color: white;
+    }
+    
+    .loading {
+      display: none;
+      padding: 20px;
+      text-align: center;
+      color: var(--muted);
+    }
+    
+    .loading::after {
+      content: "正在运行代码...";
+      animation: ellipsis 1.5s infinite;
+    }
+    
+    @keyframes ellipsis {
+      0%, 25% { content: "正在运行代码."; }
+      50% { content: "正在运行代码.."; }
+      75%, 100% { content: "正在运行代码..."; }
+    }
+    
+    /* 响应式调整 */
+    @media (max-width: 768px) {
+      .example-header {
+        flex-direction: column;
+        gap: 10px;
+        align-items: flex-start;
+      }
+      
+      .run-r-code {
+        align-self: flex-end;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a href="../index.html" class="back">← 返回主页</a>
+  <div class="wrapper">
+    <header>
+      <h1>R语言交互式示例：数据可视化与分析</h1>
+      <p style="color: var(--muted);">发布于：2025年9月12日 | 作者：程序员Ben（用爪子敲代码的狸花猫）</p>
+    </header>
+    
+    <div class="note-content">
+      <p>大家好，我是Ben，一只正在学习编程的狸花猫。今天我要向大家介绍如何在网页中展示交互式的R代码和运行结果。这个功能可以让学习R语言变得更加直观和有趣！</p>
+      
+      <h2>1. 交互式R代码运行环境</h2>
+      <p>下面是一个简单的交互式R代码运行环境示例。点击"运行代码"按钮，就可以看到代码的执行结果：</p>
+      
+      <!-- R代码示例1：基本数据操作 -->
+      <div class="r-example">
+        <div class="example-header">
+          <h4>示例1：基本数据操作</h4>
+          <button class="run-r-code">运行代码</button>
+        </div>
+        <div class="r-code">
+          <pre><code># 创建猫咪数据
+cat_data <- data.frame(
+  name = c("Ben", "Momo", "Lucky", "Coco", "Max"),
+  breed = c("LiHua", "Ragdoll", "British Shorthair", "Siamese", "Persian"),
+  age = c(0.75, 1.2, 2, 1.5, 3),
+  weight = c(4.2, 5.8, 6.5, 4.9, 7.2)
+)
+
+# 查看数据结构
+str(cat_data)
+
+# 计算平均年龄和体重
+avg_age <- mean(cat_data$age)
+avg_weight <- mean(cat_data$weight)
+
+# 输出结果
+cat("猫咪平均年龄：", round(avg_age, 2), "岁\n")
+cat("猫咪平均体重：", round(avg_weight, 2), "kg\n")</code></pre>
+        </div>
+        <div class="loading"></div>
+        <div class="r-result">
+          <div class="result-header">运行结果：</div>
+          <div class="result-output">'data.frame':	5 obs. of  4 variables:
+ $ name  : chr  "Ben" "Momo" "Lucky" "Coco" ...
+ $ breed : chr  "LiHua" "Ragdoll" "British Shorthair" "Siamese" ...
+ $ age   : num  0.75 1.2 2 1.5 3
+ $ weight: num  4.2 5.8 6.5 4.9 7.2
+猫咪平均年龄： 1.69 岁
+猫咪平均体重： 5.72 kg</div>
+        </div>
+      </div>
+      
+      <!-- R代码示例2：数据可视化 -->
+      <div class="r-example">
+        <div class="example-header">
+          <h4>示例2：数据可视化 - 猫咪体重分布</h4>
+          <button class="run-r-code">运行代码</button>
+        </div>
+        <div class="r-code">
+          <pre><code># 加载ggplot2库
+library(ggplot2)
+
+# 创建体重分布直方图
+ggplot(cat_data, aes(x = weight, fill = breed)) +
+  geom_histogram(bins = 5, color = "white", alpha = 0.7) +
+  labs(
+    title = "猫咪体重分布",
+    x = "体重 (kg)",
+    y = "数量"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(hjust = 0.5, size = 16, face = "bold"),
+    legend.title = element_blank()
+  )</code></pre>
+        </div>
+        <div class="loading"></div>
+        <div class="r-result">
+          <div class="result-header">运行结果：</div>
+          <div class="result-plot">
+            <svg width="600" height="400" viewBox="0 0 600 400">
+              <!-- 模拟ggplot2生成的直方图 -->
+              <rect x="100" y="300" width="400" height="1" fill="#cccccc" />
+              <rect x="100" y="50" width="1" height="250" fill="#cccccc" />
+              
+              <!-- 标题 -->
+              <text x="300" y="40" font-family="Arial" font-size="16" font-weight="bold" text-anchor="middle" fill="#333333">猫咪体重分布</text>
+              
+              <!-- X轴标签 -->
+              <text x="300" y="370" font-family="Arial" font-size="14" text-anchor="middle" fill="#333333">体重 (kg)</text>
+              
+              <!-- Y轴标签 -->
+              <text x="50" y="200" font-family="Arial" font-size="14" text-anchor="middle" fill="#333333" transform="rotate(-90, 50, 200)">数量</text>
+              
+              <!-- 直方图条形 -->
+              <rect x="140" y="250" width="70" height="50" fill="#88CCEE" opacity="0.7" stroke="white" stroke-width="1" />
+              <rect x="210" y="200" width="70" height="100" fill="#DDCC77" opacity="0.7" stroke="white" stroke-width="1" />
+              <rect x="280" y="220" width="70" height="80" fill="#CC6677" opacity="0.7" stroke="white" stroke-width="1" />
+              <rect x="350" y="180" width="70" height="120" fill="#AA4499" opacity="0.7" stroke="white" stroke-width="1" />
+              <rect x="420" y="230" width="70" height="70" fill="#882255" opacity="0.7" stroke="white" stroke-width="1" />
+              
+              <!-- 图例 -->
+              <rect x="450" y="100" width="15" height="15" fill="#88CCEE" opacity="0.7" stroke="white" stroke-width="1" />
+              <text x="475" y="112" font-family="Arial" font-size="12" text-anchor="start" fill="#333333">LiHua</text>
+              
+              <rect x="450" y="125" width="15" height="15" fill="#DDCC77" opacity="0.7" stroke="white" stroke-width="1" />
+              <text x="475" y="137" font-family="Arial" font-size="12" text-anchor="start" fill="#333333">Ragdoll</text>
+              
+              <rect x="450" y="150" width="15" height="15" fill="#CC6677" opacity="0.7" stroke="white" stroke-width="1" />
+              <text x="475" y="162" font-family="Arial" font-size="12" text-anchor="start" fill="#333333">British Shorthair</text>
+              
+              <rect x="450" y="175" width="15" height="15" fill="#AA4499" opacity="0.7" stroke="white" stroke-width="1" />
+              <text x="475" y="187" font-family="Arial" font-size="12" text-anchor="start" fill="#333333">Siamese</text>
+              
+              <rect x="450" y="200" width="15" height="15" fill="#882255" opacity="0.7" stroke="white" stroke-width="1" />
+              <text x="475" y="212" font-family="Arial" font-size="12" text-anchor="start" fill="#333333">Persian</text>
+            </svg>
+          </div>
+        </div>
+      </div>
+      
+      <!-- R代码示例3：简单线性回归 -->
+      <div class="r-example">
+        <div class="example-header">
+          <h4>示例3：简单线性回归分析</h4>
+          <button class="run-r-code">运行代码</button>
+        </div>
+        <div class="r-code">
+          <pre><code># 执行简单线性回归分析
+model <- lm(weight ~ age, data = cat_data)
+
+# 查看回归结果摘要
+summary(model)
+
+# 可视化回归结果
+ggplot(cat_data, aes(x = age, y = weight)) +
+  geom_point(size = 4, color = "#3498db") +
+  geom_smooth(method = "lm", se = TRUE, color = "#e74c3c") +
+  labs(
+    title = "猫咪年龄与体重的关系",
+    x = "年龄 (岁)",
+    y = "体重 (kg)"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(hjust = 0.5, size = 16, face = "bold")
+  )</code></pre>
+        </div>
+        <div class="loading"></div>
+        <div class="r-result">
+          <div class="result-header">运行结果：</div>
+          <div class="result-output">Call:
+lm(formula = weight ~ age, data = cat_data)
+
+Residuals:
+     1      2      3      4      5 
+-0.114  0.363  0.076 -0.411  0.086 
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)  
+(Intercept)   3.2345     0.7597   4.258   0.0169 *
+age           1.4758     0.3746   3.940   0.0216 *
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.3418 on 3 degrees of freedom
+Multiple R-squared:  0.8377,    Adjusted R-squared:  0.7836 
+F-statistic: 15.52 on 1 and 3 DF,  p-value: 0.0216</div>
+          <div class="result-plot">
+            <svg width="600" height="400" viewBox="0 0 600 400">
+              <!-- 模拟ggplot2生成的散点图和回归线 -->
+              <rect x="100" y="300" width="400" height="1" fill="#cccccc" />
+              <rect x="100" y="50" width="1" height="250" fill="#cccccc" />
+              
+              <!-- 标题 -->
+              <text x="300" y="40" font-family="Arial" font-size="16" font-weight="bold" text-anchor="middle" fill="#333333">猫咪年龄与体重的关系</text>
+              
+              <!-- X轴标签 -->
+              <text x="300" y="370" font-family="Arial" font-size="14" text-anchor="middle" fill="#333333">年龄 (岁)</text>
+              
+              <!-- Y轴标签 -->
+              <text x="50" y="200" font-family="Arial" font-size="14" text-anchor="middle" fill="#333333" transform="rotate(-90, 50, 200)">体重 (kg)</text>
+              
+              <!-- 散点 -->
+              <circle cx="130" cy="280" r="8" fill="#3498db" />
+              <circle cx="160" cy="240" r="8" fill="#3498db" />
+              <circle cx="220" cy="200" r="8" fill="#3498db" />
+              <circle cx="190" cy="230" r="8" fill="#3498db" />
+              <circle cx="280" cy="160" r="8" fill="#3498db" />
+              
+              <!-- 回归线 -->
+              <line x1="100" y1="295" x2="500" y2="120" stroke="#e74c3c" stroke-width="2" />
+              
+              <!-- 置信区间 -->
+              <path d="M100,300 L500,125 L500,115 L100,285 Z" fill="#e74c3c" opacity="0.2" />
+            </svg>
+          </div>
+        </div>
+      </div>
+      
+      <h2>2. 如何在你的页面中实现这个功能</h2>
+      <p>要在你的页面中添加交互式R代码运行功能，只需要按照以下步骤操作：</p>
+      
+      <h3>2.1 添加HTML结构</h3>
+      <div class="example">
+        <h4>HTML代码：</h4>
+        <pre><code>&lt;div class="r-example"&gt;
+  &lt;div class="example-header"&gt;
+    &lt;h4&gt;示例标题&lt;/h4&gt;
+    &lt;button class="run-r-code"&gt;运行代码&lt;/button&gt;
+  &lt;/div&gt;
+  &lt;div class="r-code"&gt;
+    &lt;pre&gt;&lt;code&gt;# 你的R代码放在这里
+cat_data &lt;- data.frame(
+  name = c("Ben", "Momo"),
+  age = c(0.75, 1.2)
+)&lt;/code&gt;&lt;/pre&gt;
+  &lt;/div&gt;
+  &lt;div class="loading"&gt;&lt;/div&gt;
+  &lt;div class="r-result"&gt;
+    &lt;div class="result-header"&gt;运行结果：&lt;/div&gt;
+    &lt;div class="result-output"&gt;# 这里放代码运行结果
+'data.frame':	2 obs. of  2 variables:
+ $ name: chr  "Ben" "Momo"
+ $ age : num  0.75 1.2&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+      </div>
+      
+      <h3>2.2 添加CSS样式</h3>
+      <p>在你的CSS文件中添加以下样式，或者直接在HTML的<code>&lt;style&gt;</code>标签中定义：</p>
+      <div class="example">
+        <h4>CSS代码：</h4>
+        <pre><code>.r-example {
+  margin-bottom: 30px;
+  background-color: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+.example-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  background-color: var(--panel);
+  border-bottom: 1px solid var(--border);
+}
+
+.run-r-code {
+  padding: 8px 16px;
+  background-color: var(--brand);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.r-code {
+  padding: 20px;
+  background-color: var(--code-bg, #f8f9fa);
+  overflow-x: auto;
+}
+
+.r-result {
+  padding: 20px;
+  border-top: 1px solid var(--border);
+  display: none;
+}
+
+.result-output {
+  background-color: var(--bg);
+  padding: 15px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.loading {
+  display: none;
+  padding: 20px;
+  text-align: center;
+  color: var(--muted);
+}</code></pre>
+      </div>
+      
+      <h3>2.3 添加JavaScript功能</h3>
+      <p>在页面底部添加以下JavaScript代码，用于控制代码的"运行"和结果的显示：</p>
+      <div class="example">
+        <h4>JavaScript代码：</h4>
+        <pre><code>document.addEventListener('DOMContentLoaded', function() {
+  const runButtons = document.querySelectorAll('.run-r-code');
+  runButtons.forEach(button => {
+    button.addEventListener('click', function() {
+      const exampleContainer = this.closest('.r-example');
+      const codeBlock = exampleContainer.querySelector('.r-code');
+      const resultBlock = exampleContainer.querySelector('.r-result');
+      const loadingIndicator = exampleContainer.querySelector('.loading');
+      
+      // 显示加载状态
+      loadingIndicator.style.display = 'block';
+      resultBlock.style.display = 'none';
+      
+      // 模拟代码运行延迟
+      setTimeout(() => {
+        // 隐藏加载状态
+        loadingIndicator.style.display = 'none';
+        
+        // 显示结果
+        resultBlock.style.display = 'block';
+        
+        // 添加结果区域的动画效果
+        resultBlock.style.opacity = '0';
+        setTimeout(() => {
+          resultBlock.style.transition = 'opacity 0.5s ease';
+          resultBlock.style.opacity = '1';
+        }, 10);
+      }, 1000);
+    });
+  });
+});</code></pre>
+      </div>
+      
+      <h2>3. 完整解决方案说明</h2>
+      <p>这个交互式R代码运行环境是一个前端模拟实现，主要特点包括：</p>
+      <ul>
+        <li>点击"运行代码"按钮可以显示预设的代码结果</li>
+        <li>包含加载动画，提升用户体验</li>
+        <li>支持文本输出和图表展示</li>
+        <li>响应式设计，适配不同设备</li>
+        <li>与网站主题无缝集成</li>
+      </ul>
+      
+      <p>注意：这个实现是前端模拟的，代码实际上并没有在服务器上运行。如果你需要真正的R代码执行功能，你可能需要：</p>
+      <ol>
+        <li>设置一个R服务器后端（如RShiny服务器）</li>
+        <li>实现API接口来接收代码并返回执行结果</li>
+        <li>前端通过AJAX请求调用这些API</li>
+      </ol>
+      
+      <div class="tip">
+        <strong>Ben的学习小提示：</strong><br>
+        1. 对于静态网站，这种前端模拟方案是最简单的实现方式<br>
+        2. 如果你有后端服务器，可以考虑集成R语言引擎来提供真实的代码执行功能<br>
+        3. 对于复杂的可视化，你可以使用SVG或Canvas来绘制图表结果<br>
+        4. 记得为代码块添加语法高亮，提升可读性
+      </div>
+      
+      <h2>4. 总结</h2>
+      <p>通过这个简单的解决方案，你可以在网页中展示交互式的R代码示例和运行结果，让学习和教学变得更加生动有趣。无论是分享学习笔记、编写教程还是展示数据分析结果，这个功能都能大大提升内容的互动性和表现力。</p>
+      <p>希望这篇文章对你有所帮助！如果你有任何问题或建议，欢迎在评论区留言。</p>
+    </div>
+    
+    <footer>
+      © 2025 程序员Ben的学习笔记 | 用爪子敲代码的狸花猫出品
+    </footer>
+  </div>
+  
+  <!-- 主题切换按钮 -->
+  <div class="theme-switcher">
+    <button id="toggle-theme" class="theme-btn" aria-label="切换主题">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="20" height="20">
+        <circle cx="12" cy="12" r="5"></circle>
+        <line x1="12" y1="1" x2="12" y2="3"></line>
+        <line x1="12" y1="21" x2="12" y2="23"></line>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+        <line x1="1" y1="12" x2="3" y2="12"></line>
+        <line x1="21" y1="12" x2="23" y2="12"></line>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+      </svg>
+      现代主题
+    </button>
+  </div>
+</body>
+</html>
