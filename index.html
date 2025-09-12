@@ -3,178 +3,40 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>程序员Ben | 狸花猫的技术学习主页</title>
+  <title>程序员Ben | 技术学习主页</title>
   <meta name="description" content="Ben：9个月狸花猫程序员，主攻Java/Python/R，技术学习中！" />
   <meta property="og:title" content="程序员Ben | 狸花猫的技术学习主页" />
   <meta property="og:description" content="狸花猫程序员 × Java/Python/R × 技术学习" />
   <meta property="og:type" content="website" />
   <meta property="og:locale" content="zh_CN" />
   <meta name="theme-color" content="#8b4513">
-  <style>
-    /* === CSS 变量（古典底色+技术感点缀）=== */
-    :root{
-      --bg: #f5f0e6;           /* 米白（古典纸色，模拟代码文档底色） */
-      --panel: #e8dcc5;        /* 浅棕（木纹面板，适配代码块质感） */
-      --muted: #7a5c43;        /* 深棕灰（注释色，贴合代码风格） */
-      --text: #3d2b1f;         /* 深棕黑（代码正文色，清晰不刺眼） */
-      --brand: #8b4513;        /* 暗红棕（主色，古典庄重，适配标题） */
-      --accent: #d4af37;       /* 暖金（强调色，标记关键代码/技能） */
-      --code: #6b4226;         /* 代码色（深棕，突出技术内容） */
-      --ring: rgba(139,69,19,.2); /* hover边框色 */
-      --card: #f0e6d2;         /* 卡片色（浅米棕，模拟代码卡片） */
-      --border: #d9c8b4;       /* 边框色（浅棕，分割内容块） */
-    }
-    *,*::before,*::after{ box-sizing:border-box }
-    html,body{ height:100% }
-    body{
-      margin:0; font: 16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Noto Sans",sans-serif;
-      background: radial-gradient(1200px 800px at 10% -10%, rgba(212,175,55,.05), transparent 40%),
-                  radial-gradient(800px 600px at 110% 20%, rgba(139,69,19,.05), transparent 40%),
-                  var(--bg);
-      color: var(--text);
-    }
-    a{ color: var(--brand); text-decoration: none }
-    a:hover{ text-decoration: underline; color: var(--accent) }
-    /* 代码片段样式（突出技术感） */
-    .code{
-      display:inline-block; padding:2px 6px; border-radius:4px;
-      background: rgba(107,66,38,.1); color: var(--code);
-      font-family: 'Consolas', 'Monaco', monospace; font-size:.9rem;
-    }
-
-    /* === 布局 === */
-    .wrapper{ max-width:1200px; margin:0 auto; padding:24px; }
-    .grid{
-      display:grid; grid-template-columns: 340px 1fr; gap:24px;
-    }
-    @media (max-width: 900px){ .grid{ grid-template-columns: 1fr } }
-
-    /* === 侧边栏（狸花猫程序员信息）=== */
-    .sidebar{
-      position: sticky; top:24px; align-self:start;
-      background: linear-gradient(180deg, var(--panel), var(--card));
-      border: 1px solid var(--border);
-      border-radius: 16px; padding: 24px; box-shadow: 0 8px 24px rgba(61,43,31,.1);
-    }
-    .avatar{
-      width: 100px; height:100px; border-radius: 50%; object-fit: cover; display:block; margin:0 auto 12px;
-      border: 2px solid var(--accent);
-      box-shadow: 0 0 0 4px rgba(212,175,55,.15);
-    }
-    .name{ 
-      font-size: 1.7rem; margin: 8px 0 4px 0; text-align: center; color: var(--brand);
-      display: flex; align-items: center; justify-content: center; gap:8px;
-    }
-    .name svg{ width:24px; height:24px; color:var(--accent); }
-    .tagline{ 
-      color: var(--muted); margin: 4px 0 14px 0; text-align: center;
-      font-style: italic;
-    }
-
-    /* 猫咪程序员核心信息（品种/年龄/技能） */
-    .cat-info{
-      margin: 16px 0; padding: 12px; border-radius: 12px;
-      background: rgba(212,175,55,.05); border: 1px solid var(--border);
-    }
-    .cat-info h3{
-      margin:0 0 8px 0; font-size:1.1rem; color: var(--brand);
-      border-bottom: 1px dashed var(--border); padding-bottom:4px;
-    }
-    .skill-list{
-      display: flex; flex-wrap: wrap; gap:8px; margin-top:8px;
-    }
-    .skill{
-      padding:4px 10px; border-radius: 20px;
-      background: linear-gradient(180deg, rgba(139,69,19,.1), rgba(139,69,19,.05));
-      color: var(--code); font-size:.9rem; font-weight:600;
-      border:1px solid var(--border);
-    }
-
-    .mini{
-      display: grid; gap:8px; margin: 14px 0 18px 0; color:var(--muted);
-      padding-left: 4px;
-    }
-    .mini b{ color: var(--text) }
-
-    .credit{
-      margin-top: 12px; font-size: .95rem; color: var(--muted);
-      padding: 10px 12px; border: 1px dashed var(--border); border-radius: 12px; background: rgba(212,175,55,.05);
-      text-align: center;
-    }
-    .credit .cat{ font-weight:700; color:var(--accent) }
-
-    .links{ display:flex; gap:10px; flex-wrap:wrap; margin-top: 10px; justify-content: center; }
-    .btn{
-      display:inline-flex; align-items:center; gap:8px; padding:8px 12px; border-radius:10px;
-      background: linear-gradient(180deg, rgba(139,69,19,.1), rgba(139,69,19,.05));
-      border:1px solid var(--border);
-      transition: transform .15s ease, box-shadow .15s ease;
-      color: var(--brand);
-    }
-    .btn:hover{ 
-      transform: translateY(-1px); 
-      box-shadow:0 6px 18px var(--ring);
-      background: linear-gradient(180deg, rgba(139,69,19,.15), rgba(139,69,19,.1));
-      color: var(--accent);
-    }
-    .btn svg{ width:18px; height:18px; fill: currentColor; }
-
-    /* === 主内容（技术学习内容）=== */
-    .main{ display:grid; gap:24px }
-    .section{
-      background: linear-gradient(180deg, var(--panel), var(--card));
-      border:1px solid var(--border); border-radius:16px; padding: 20px 22px;
-      box-shadow: 0 4px 16px rgba(61,43,31,.05);
-    }
-    .section h2{ 
-      margin: 6px 0 10px 0; 
-      letter-spacing:.3px; 
-      color: var(--brand);
-      border-bottom: 1px solid var(--border);
-      padding-bottom: 8px;
-      display: flex; align-items: center; gap:8px;
-    }
-    .section h2 svg{ width:22px; height:22px; color:var(--accent); }
-    .list{ display:grid; gap:12px; margin:12px 0 0 0 }
-
-    .item{
-      display:flex; align-items:flex-start; gap:12px; padding:12px; border:1px solid var(--border); border-radius:12px; background: rgba(240,230,210,.3);
-      transition: border-color .15s ease, background .2s ease, transform .15s ease;
-    }
-    .item:hover{ 
-      border-color: var(--accent); 
-      background: rgba(212,175,55,.08);
-      transform: translateX(2px);
-    }
-    .item .dot{
-      flex:0 0 10px; height:10px; margin-top:6px; border-radius:50%; background: linear-gradient(135deg, var(--brand), var(--accent));
-      box-shadow: 0 0 0 3px rgba(139,69,19,.15);
-    }
-
-    .item h3{ margin:0 0 4px 0; font-size:1.05rem; color: var(--text) }
-    .meta{ color: var(--muted); font-size:.92rem; line-height:1.4 }
-    .meta span{ color: var(--code); font-weight:500; }
-
-    footer{ 
-      text-align:center; 
-      color:var(--muted); 
-      padding:18px 0 36px;
-      margin-top: 24px;
-      border-top: 1px solid var(--border);
-    }
-    footer .code{ font-size:.85rem; }
-
-    /* === 可访问性 === */
-    :focus-visible{ outline: 3px solid var(--accent); outline-offset: 2px }
-  </style>
+  <link rel="stylesheet" href="css/style.css" id="theme-stylesheet">
 </head>
 <body>
+  <div class="theme-switcher">
+    <button id="toggle-theme" class="theme-btn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="20" height="20">
+        <circle cx="12" cy="12" r="5"></circle>
+        <line x1="12" y1="1" x2="12" y2="3"></line>
+        <line x1="12" y1="21" x2="12" y2="23"></line>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+        <line x1="1" y1="12" x2="3" y2="12"></line>
+        <line x1="21" y1="12" x2="23" y2="12"></line>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+      </svg>
+      切换主题
+    </button>
+  </div>
+  
+
   <div class="wrapper">
     <div class="grid">
       <!-- 侧边栏（狸花猫程序员Ben信息） -->
       <aside class="sidebar" aria-label="狸花猫程序员Ben的信息">
-        <!-- 替换为狸花猫头像（建议带键盘/代码元素，增强人设） -->
-        <img src="images/ben-coder-cat.jpg" alt="狸花猫程序员Ben的头像" class="avatar" />
+        <!-- 狸花猫程序员Ben的头像（键盘和代码的忠实伙伴） -->
+        <img src="images/ben-coder-cat.svg" alt="狸花猫程序员Ben的头像" class="avatar" />
         <div class="name">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
@@ -183,13 +45,13 @@
           </svg>
           程序员Ben
         </div>
-        <div class="tagline">9个月狸花猫 | 主攻Java/Python/R | 技术学习中</div>
+        <div class="tagline">年龄10个月| 主攻Java/Python/R 以及自由搏击| 技术学习中</div>
 
         <!-- 核心信息卡片：品种/年龄/技能 -->
         <div class="cat-info">
           <h3>🐱 关于Ben</h3>
-          <div><b>品种：</b>中华狸花猫（自带“代码天赋”花纹）</div>
-          <div><b>年龄：</b>9个月（正值技术学习黄金期）</div>
+          <div><b>品种：</b>中华狸花猫</div>
+          <div><b>年龄：</b>10个月</div>
           <div><b>掌握技能：</b></div>
           <div class="skill-list">
             <span class="skill">Java</span>
@@ -202,8 +64,8 @@
 
         <div class="mini">
           <div><b>学习窝点：</b>书桌键盘旁（暖光台灯下效率最高）</div>
-          <div><b>代码仓库：</b><a href="https://github.com/cat-ben" target="_blank" rel="noopener">github.com/cat-ben</a></div>
-          <div><b>学习习惯：</b>每写1小时代码，睡2小时补精力</div>
+          <div><b>代码仓库：</b><a href="https://github.com/Philo-Wenzhou" target="_blank" rel="noopener">github.com/cat-ben</a></div>
+          <div><b>学习习惯：</b>每写1小时代码，睡12小时补精力</div>
         </div>
 
         <div class="links" aria-label="技术学习快捷链接">
@@ -217,7 +79,11 @@
             </svg>
             技术简历
           </a>
+<<<<<<< HEAD
           <a class="btn" href="https://github.com/cat-ben" target="_blank" rel="noopener">
+=======
+          <a class="btn" href="https://github.com/Philo-Wenzhou" target="_blank" rel="noopener">
+>>>>>>> master
             <!-- Github图标 -->
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
@@ -240,11 +106,19 @@
         </div>
       </aside>
 
+<<<<<<< HEAD
       <!-- 主内容（技术学习相关） -->
       <main class="main" id="content">
         <!-- 技术学习笔记 -->
         <section class="section" id="notes" aria-labelledby="notes-title">
           <h2 id="notes-title">
+=======
+      <!-- 主内容（学习笔记和代码更新） -->
+      <main class="main" id="content">
+        <!-- 专栏1：基础学习（R板块和Python板块） -->
+        <section class="section" id="basic-learning" aria-labelledby="basic-learning-title">
+          <h2 id="basic-learning-title">
+>>>>>>> master
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <line x1="8" y1="6" x2="21" y2="6"/>
               <line x1="8" y1="12" x2="21" y2="12"/>
@@ -253,6 +127,7 @@
               <line x1="3" y1="12" x2="3.01" y2="12"/>
               <line x1="3" y1="18" x2="3.01" y2="18"/>
             </svg>
+<<<<<<< HEAD
             技术学习 · 笔记
           </h2>
           <div class="list">
@@ -281,12 +156,76 @@
         </section>
 
         <!-- 技术实践项目 -->
+=======
+            专栏1 · 基础学习
+          </h2>
+          
+          <!-- R语言学习笔记 -->
+          <div style="margin-bottom: 20px;">
+            <h3 style="margin: 10px 0 8px 0; color: var(--brand); font-size: 1.2rem;">🐾 R语言板块</h3>
+            <div class="list">
+              <a class="item" href="notes/r-basic.html">
+                <span class="dot" aria-hidden="true"></span>
+                <div>
+                  <h3>R语言基础：数据类型与数据结构详解</h3>
+                  <div class="meta">掌握<span class="code">vector</span>、<span class="code">list</span>、<span class="code">data.frame</span>等基础数据结构 | 数据导入导出实战 | 附详细代码示例</div>
+                </div>
+              </a>
+              <a class="item" href="notes/r-visualization.html">
+                <span class="dot" aria-hidden="true"></span>
+                <div>
+                  <h3>R语言可视化：ggplot2入门到精通</h3>
+                  <div class="meta">用<span class="code">ggplot2</span>创建精美统计图表 | 图层叠加技巧 | 自定义主题与配色</div>
+                </div>
+              </a>
+              <a class="item" href="notes/r-statistics.html">
+                <span class="dot" aria-hidden="true"></span>
+                <div>
+                  <h3>R语言统计分析：基础统计方法实战</h3>
+                  <div class="meta">描述性统计分析 | 相关性分析 | 简单线性回归 | 案例：分析猫咪体重与年龄的关系</div>
+                </div>
+              </a>
+            </div>
+          </div>
+          
+          <!-- Python语言学习笔记 -->
+          <div>
+            <h3 style="margin: 10px 0 8px 0; color: var(--brand); font-size: 1.2rem;">🐍 Python板块</h3>
+            <div class="list">
+              <a class="item" href="notes/python-basic.html">
+                <span class="dot" aria-hidden="true"></span>
+                <div>
+                  <h3>Python基础：语法与核心概念</h3>
+                  <div class="meta">掌握<span class="code">if-else</span>条件语句、循环结构 | 函数定义与调用 | 面向对象编程基础</div>
+                </div>
+              </a>
+              <a class="item" href="notes/python-data-analysis.html">
+                <span class="dot" aria-hidden="true"></span>
+                <div>
+                  <h3>Python数据分析：Pandas库实战</h3>
+                  <div class="meta">用<span class="code">pandas.DataFrame</span>处理和分析数据 | 数据清洗技巧 | 数据可视化展示</div>
+                </div>
+              </a>
+              <a class="item" href="notes/python-automation.html">
+                <span class="dot" aria-hidden="true"></span>
+                <div>
+                  <h3>Python自动化：脚本编写与应用</h3>
+                  <div class="meta">文件操作自动化 | 网络爬虫入门 | 定时任务设置 | 实例：自动整理学习笔记</div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <!-- 专栏2：具体项目（需要落地的） -->
+>>>>>>> master
         <section class="section" id="projects" aria-labelledby="projects-title">
           <h2 id="projects-title">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
               <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
             </svg>
+<<<<<<< HEAD
             技术实践 · 项目
           </h2>
           <div class="list">
@@ -302,25 +241,53 @@
               <div>
                 <h3>宠物行为数据分析工具（Python + Streamlit）</h3>
                 <div class="meta">功能：上传猫咪行为CSV，自动生成统计报告 | 技术栈：Pandas（数据处理）+ Streamlit（Web界面） | 在线演示：<a href="https://cat-data-tool.streamlit.app" target="_blank">cat-data-tool.streamlit.app</a></div>
+=======
+            专栏2 · 落地项目
+          </h2>
+          <div class="list">
+            <a class="item" href="projects/data-analysis-dashboard.html">
+              <span class="dot" aria-hidden="true"></span>
+              <div>
+                <h3>数据分析仪表盘（R Shiny + Python Flask）</h3>
+                <div class="meta">功能：整合多源数据，实时展示分析结果 | 技术栈：R Shiny（前端）+ Python Flask（后端API） | 已部署上线，可直接访问</div>
+              </div>
+            </a>
+            <a class="item" href="projects/study-notes-management.html">
+              <span class="dot" aria-hidden="true"></span>
+              <div>
+                <h3>学习笔记管理系统（Python + SQLite）</h3>
+                <div class="meta">功能：笔记创建、分类、搜索与导出 | 技术栈：Python（后端）+ Tkinter（桌面界面）+ SQLite（数据存储） | 个人学习必备工具</div>
+>>>>>>> master
               </div>
             </a>
             <a class="item" href="projects/skill-tracker.html">
               <span class="dot" aria-hidden="true"></span>
               <div>
                 <h3>技能学习进度追踪器（R + Shiny）</h3>
+<<<<<<< HEAD
                 <div class="meta">功能：可视化Java/Python/R学习进度 | 技术栈：ggplot2（绘图）+ Shiny（交互Web） | 特色：用“猫爪图标”标记已掌握知识点</div>
+=======
+                <div class="meta">功能：可视化R和Python学习进度 | 技术栈：ggplot2（数据可视化）+ Shiny（交互界面） | 定期更新学习状态</div>
+>>>>>>> master
               </div>
             </a>
           </div>
         </section>
 
+<<<<<<< HEAD
         <!-- 学习动态 -->
         <section class="section" id="updates" aria-labelledby="updates-title">
           <h2 id="updates-title">
+=======
+        <!-- 代码更新动态 -->
+        <section class="section" id="code-updates" aria-labelledby="code-updates-title">
+          <h2 id="code-updates-title">
+>>>>>>> master
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <circle cx="12" cy="12" r="10"/>
               <polyline points="12 6 12 12 16 14"/>
             </svg>
+<<<<<<< HEAD
             学习动态 · 最近
           </h2>
           <div class="list">
@@ -343,6 +310,30 @@
               <div>
                 <h3>R Shiny项目部署：把“技能追踪器”放到网上啦！</h3>
                 <div class="meta">用<span class="code">shinyapps.io</span>部署 | 解决“依赖包版本冲突”问题 | 访问量：3天12次（都是Ben自己点的）</div>
+=======
+            代码更新 · 动态
+          </h2>
+          <div class="list">
+            <a class="item" href="posts/2025-09-10-r-shiny-optimization.html">
+              <span class="dot" aria-hidden="true"></span>
+              <div>
+                <h3>R Shiny应用性能优化：从30秒加载到3秒</h3>
+                <div class="meta">数据预处理优化 | 缓存机制实现 | 代码重构技巧 | GitHub仓库已更新</div>
+              </div>
+            </a>
+            <a class="item" href="posts/2025-09-05-python-automation-script.html">
+              <span class="dot" aria-hidden="true"></span>
+              <div>
+                <h3>Python自动化脚本：学习笔记自动分类整理</h3>
+                <div class="meta">基于关键词的自动分类 | 文件重命名与归档 | 定时执行设置 | 附完整源码</div>
+              </div>
+            </a>
+            <a class="item" href="posts/2025-08-28-data-visualization-improvement.html">
+              <span class="dot" aria-hidden="true"></span>
+              <div>
+                <h3>数据可视化效果提升：配色与交互设计优化</h3>
+                <div class="meta">基于用户体验的色彩选择 | 交互功能增强 | 响应式设计实现 | 案例对比展示</div>
+>>>>>>> master
               </div>
             </a>
           </div>
@@ -354,5 +345,62 @@
       © 2025 程序员Ben · 狸花猫的技术学习主页 | 今日学习进度：<span class="code">Java基础 ✅ | SpringBoot 🔄 | Python爬虫 ✅</span> 🐱💻
     </footer>
   </div>
+<<<<<<< HEAD
+=======
+  
+  <script>
+    // 主题切换功能
+    const themeStylesheet = document.getElementById('theme-stylesheet');
+    const toggleThemeBtn = document.getElementById('toggle-theme');
+    const themeIcon = toggleThemeBtn.querySelector('svg');
+    let isModernTheme = false;
+    
+    // 检查本地存储中的主题偏好
+    const savedTheme = localStorage.getItem('preferred-theme');
+    if (savedTheme === 'modern') {
+      themeStylesheet.href = 'css/modern-style.css';
+      isModernTheme = true;
+      updateThemeButton();
+    }
+    
+    toggleThemeBtn.addEventListener('click', () => {
+      if (isModernTheme) {
+        themeStylesheet.href = 'css/style.css';
+        localStorage.setItem('preferred-theme', 'original');
+      } else {
+        themeStylesheet.href = 'css/modern-style.css';
+        localStorage.setItem('preferred-theme', 'modern');
+      }
+      isModernTheme = !isModernTheme;
+      updateThemeButton();
+    });
+    
+    function updateThemeButton() {
+      if (isModernTheme) {
+        toggleThemeBtn.innerHTML = `
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="20" height="20">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+          原始主题
+        `;
+      } else {
+        toggleThemeBtn.innerHTML = `
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="20" height="20">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+          现代主题
+        `;
+      }
+    }
+  </script>
+>>>>>>> master
 </body>
 </html>

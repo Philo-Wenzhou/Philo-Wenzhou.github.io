@@ -1,0 +1,471 @@
+/* 全局样式设置 */
+/* === CSS 变量（古典底色+技术感点缀）=== */
+:root{
+  --bg: #f5f0e6;           /* 米白（古典纸色，模拟代码文档底色） */
+  --panel: #e8dcc5;        /* 浅棕（木纹面板，适配代码块质感） */
+  --muted: #7a5c43;        /* 深棕灰（注释色，贴合代码风格） */
+  --text: #3d2b1f;         /* 深棕黑（代码正文色，清晰不刺眼） */
+  --brand: #8b4513;        /* 暗红棕（主色，古典庄重，适配标题） */
+  --accent: #d4af37;       /* 暖金（强调色，标记关键代码/技能） */
+  --code: #6b4226;         /* 代码色（深棕，突出技术内容） */
+  --ring: rgba(139,69,19,.2); /* hover边框色 */
+  --card: #f0e6d2;         /* 卡片色（浅米棕，模拟代码卡片） */
+  --border: #d9c8b4;       /* 边框色（浅棕，分割内容块） */
+}
+
+/* 主题切换器样式 */
+.theme-switcher {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+}
+
+.theme-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 25px;
+  color: var(--brand);
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(61,43,31,.1);
+}
+
+.theme-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(61,43,31,.15);
+  background: var(--card);
+  color: var(--accent);
+}
+
+.theme-btn svg {
+  flex-shrink: 0;
+}
+
+/* 基础重置 */
+*,*::before,*::after{ box-sizing:border-box }
+html,body{ height:100% }
+
+/* 全局样式 */
+body{
+  margin:0; 
+  font: 16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Noto Sans",sans-serif;
+  background: radial-gradient(1200px 800px at 10% -10%, rgba(212,175,55,.05), transparent 40%),
+              radial-gradient(800px 600px at 110% 20%, rgba(139,69,19,.05), transparent 40%),
+              var(--bg);
+  color: var(--text);
+}
+
+a{ color: var(--brand); text-decoration: none }
+a:hover{ text-decoration: underline; color: var(--accent) }
+
+/* 代码片段样式（突出技术感） */
+.code{
+  display:inline-block; padding:2px 6px; border-radius:4px;
+  background: rgba(107,66,38,.1); color: var(--code);
+  font-family: 'Consolas', 'Monaco', monospace; font-size:.9rem;
+}
+
+/* 代码块样式 */
+pre{
+  background: rgba(107,66,38,.1); 
+  padding:16px;
+  border-radius:8px; 
+  overflow-x: auto;
+  font-family: 'Consolas', 'Monaco', monospace; 
+  font-size:.9rem; 
+  margin: 16px 0;
+  line-height: 1.5;
+  border: 1px solid var(--border);
+}
+
+pre code{
+  color: var(--code);
+}
+
+/* === 布局 === */
+.wrapper{ max-width:1200px; margin:0 auto; padding:24px; }
+.grid{
+  display:grid; grid-template-columns: 340px 1fr; gap:24px;
+}
+
+/* === 侧边栏（狸花猫程序员信息）=== */
+.sidebar{
+  position: sticky; top:24px; align-self:start;
+  background: linear-gradient(180deg, var(--panel), var(--card));
+  border: 1px solid var(--border);
+  border-radius: 16px; padding: 24px; box-shadow: 0 8px 24px rgba(61,43,31,.1);
+}
+
+.avatar{
+  width: 100px; height:100px; border-radius: 50%; object-fit: cover; display:block; margin:0 auto 12px;
+  border: 2px solid var(--accent);
+  box-shadow: 0 0 0 4px rgba(212,175,55,.15);
+}
+
+.name{ 
+  font-size: 1.7rem; margin: 8px 0 4px 0; text-align: center; color: var(--brand);
+  display: flex; align-items: center; justify-content: center; gap:8px;
+}
+
+.name svg{ width:24px; height:24px; color:var(--accent); }
+
+.tagline{ 
+  color: var(--muted); margin: 4px 0 14px 0; text-align: center;
+  font-style: italic;
+}
+
+/* 猫咪程序员核心信息（品种/年龄/技能） */
+.cat-info{
+  margin: 16px 0; padding: 12px; border-radius: 12px;
+  background: rgba(212,175,55,.05); border: 1px solid var(--border);
+}
+
+.cat-info h3{
+  margin:0 0 8px 0; font-size:1.1rem; color: var(--brand);
+  border-bottom: 1px dashed var(--border); padding-bottom:4px;
+}
+
+.skill-list{
+  display: flex; flex-wrap: wrap; gap:8px; margin-top:8px;
+}
+
+.skill{
+  padding:4px 10px; border-radius: 20px;
+  background: linear-gradient(180deg, rgba(139,69,19,.1), rgba(139,69,19,.05));
+  color: var(--code); font-size:.9rem; font-weight:600;
+  border:1px solid var(--border);
+}
+
+.mini{
+  display: grid; gap:8px; margin: 14px 0 18px 0; color:var(--muted);
+  padding-left: 4px;
+}
+
+.mini b{ color: var(--text) }
+
+.credit{
+  margin-top: 12px; font-size: .95rem; color: var(--muted);
+  padding: 10px 12px; border: 1px dashed var(--border); border-radius: 12px; background: rgba(212,175,55,.05);
+  text-align: center;
+}
+
+.credit .cat{ font-weight:700; color:var(--accent) }
+
+.links{ display:flex; gap:10px; flex-wrap:wrap; margin-top: 10px; justify-content: center; }
+
+.btn{
+  display:inline-flex; align-items:center; gap:8px; padding:8px 12px; border-radius:10px;
+  background: linear-gradient(180deg, rgba(139,69,19,.1), rgba(139,69,19,.05));
+  border:1px solid var(--border);
+  transition: transform .15s ease, box-shadow .15s ease;
+  color: var(--brand);
+}
+
+.btn:hover{ 
+  transform: translateY(-1px); 
+  box-shadow:0 6px 18px var(--ring);
+  background: linear-gradient(180deg, rgba(139,69,19,.15), rgba(139,69,19,.1));
+  color: var(--accent);
+}
+
+.btn svg{ width:18px; height:18px; fill: currentColor; }
+
+/* === 主内容（技术学习内容）=== */
+.main{ display:grid; gap:24px }
+
+.section{
+  background: linear-gradient(180deg, var(--panel), var(--card));
+  border:1px solid var(--border); border-radius:16px; padding: 20px 22px;
+  box-shadow: 0 4px 16px rgba(61,43,31,.05);
+}
+
+.section h2{ 
+  margin: 6px 0 10px 0; 
+  letter-spacing:.3px; 
+  color: var(--brand);
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+  display: flex; align-items: center; gap:8px;
+}
+
+.section h2 svg{ width:22px; height:22px; color:var(--accent); }
+
+.list{ display:grid; gap:12px; margin:12px 0 0 0 }
+
+.item{
+  display:flex; align-items:flex-start; gap:12px; padding:12px; border:1px solid var(--border); border-radius:12px; background: rgba(240,230,210,.3);
+  transition: border-color .15s ease, background .2s ease, transform .15s ease;
+}
+
+.item:hover{ 
+  border-color: var(--accent); 
+  background: rgba(212,175,55,.08);
+  transform: translateX(2px);
+}
+
+.item .dot{
+  flex:0 0 10px; height:10px; margin-top:6px; border-radius:50%; background: linear-gradient(135deg, var(--brand), var(--accent));
+  box-shadow: 0 0 0 3px rgba(139,69,19,.15);
+}
+
+.item h3{ margin:0 0 4px 0; font-size:1.05rem; color: var(--text) }
+
+.meta{ color: var(--muted); font-size:.92rem; line-height:1.4 }
+
+.meta span{ color: var(--code); font-weight:500; }
+
+/* === 页脚样式 === */
+footer{ 
+  text-align:center; 
+  color:var(--muted); 
+  padding:18px 0 36px;
+  margin-top: 24px;
+  border-top: 1px solid var(--border);
+}
+
+footer .code{ font-size:.85rem; }
+
+/* === 可访问性 === */
+:focus-visible{ outline: 3px solid var(--accent); outline-offset: 2px }
+
+/* === 响应式设计 === */
+@media (max-width: 900px){
+  .grid{ grid-template-columns: 1fr }
+  .sidebar{
+    position: relative;
+    margin-bottom: 24px;
+  }
+}
+
+/* === 笔记页面样式 === */
+.back-to-home,
+.back{
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 24px;
+  padding: 8px 12px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--brand);
+  text-decoration: none;
+}
+
+.back-to-home:hover{
+  background: var(--card);
+  color: var(--accent);
+  text-decoration: none;
+}
+
+/* === 学习卡片样式 === */
+.learning-cards{
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.learning-card{
+  background-color: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.learning-card:hover{
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(61,43,31,.1);
+}
+
+.learning-card h3{
+  font-size: 1.2rem;
+  margin-top: 0;
+  margin-bottom: 10px;
+  color: var(--brand);
+}
+
+.learning-card p{
+  color: var(--muted);
+  margin-bottom: 15px;
+  font-size: 0.95rem;
+}
+
+.learning-card .tech-stack{
+  margin-bottom: 15px;
+}
+
+.learning-card a{
+  display: inline-block;
+  padding: 8px 16px;
+  background-color: var(--brand);
+  color: white;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: background-color 0.3s ease;
+}
+
+.learning-card a:hover{
+  background-color: var(--accent);
+  color: white;
+  text-decoration: none;
+}
+
+/* 技术栈标签 */
+.tech-stack{
+  display:flex; 
+  flex-wrap:wrap;
+  gap:8px;
+  margin:16px 0;
+}
+
+.tech-item{
+  padding:6px 12px;
+  border-radius:20px;
+  background: rgba(139,69,19,.1);
+  color: var(--code);
+  font-size:.9rem;
+  font-weight:600;
+  border:1px solid var(--border);
+}
+
+/* 专栏样式 */
+.column-section{
+  margin-bottom: 40px;
+}
+
+.column-header{
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+}
+
+.column-icon{
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--panel);
+  border-radius: 50%;
+  margin-right: 15px;
+  color: var(--brand);
+}
+
+.column-title{
+  font-size: 1.6rem;
+  color: var(--brand);
+  margin: 0;
+}
+
+/* 学习卡片 */
+.learning-cards{
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.learning-card{
+  background-color: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.learning-card:hover{
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(61,43,31,.1);
+}
+
+.learning-card h3{
+  font-size: 1.2rem;
+  margin-top: 0;
+  margin-bottom: 10px;
+  color: var(--brand);
+}
+
+.learning-card p{
+  color: var(--muted);
+  margin-bottom: 15px;
+  font-size: 0.95rem;
+}
+
+.learning-card .tech-stack{
+  margin-bottom: 15px;
+}
+
+.learning-card a{
+  display: inline-block;
+  padding: 8px 16px;
+  background-color: var(--brand);
+  color: white;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: background-color 0.3s ease;
+}
+
+.learning-card a:hover{
+  background-color: var(--accent);
+  color: white;
+  text-decoration: none;
+}
+
+/* 响应式设计 */
+@media (max-width: 900px){
+  .sidebar{
+    width: 200px;
+  }
+  
+  .main-content{
+    margin-left: 200px;
+  }
+  
+  .learning-cards{
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px){
+  .sidebar{
+    position: relative;
+    width: 100%;
+    height: auto;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+  }
+  
+  .main-content{
+    margin-left: 0;
+  }
+  
+  .back{
+    position: relative;
+    top: auto;
+    left: auto;
+    margin-bottom: 20px;
+  }
+  
+  h1{
+    font-size: 1.8rem;
+  }
+  
+  h2{
+    font-size: 1.5rem;
+  }
+  
+  h3{
+    font-size: 1.2rem;
+  }
+}

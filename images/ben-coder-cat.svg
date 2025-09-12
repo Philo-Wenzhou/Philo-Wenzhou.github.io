@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <!-- 背景 -->
+  <rect width="200" height="200" fill="#f5f0e6" rx="100" ry="100"/>
+  
+  <!-- 头部 -->
+  <circle cx="100" cy="80" r="60" fill="#8b4513"/>
+  
+  <!-- 脸部 -->
+  <circle cx="100" cy="80" r="50" fill="#d2b48c"/>
+  
+  <!-- 花纹 -->
+  <path d="M100,30 L100,130" stroke="#8b4513" stroke-width="4" stroke-linecap="round"/>
+  <path d="M70,60 L130,60" stroke="#8b4513" stroke-width="3" stroke-linecap="round"/>
+  <path d="M60,90 L140,90" stroke="#8b4513" stroke-width="3" stroke-linecap="round"/>
+  <path d="M65,110 L135,110" stroke="#8b4513" stroke-width="2" stroke-linecap="round"/>
+  
+  <!-- 眼睛 -->
+  <circle cx="85" cy="75" r="8" fill="#ffffff"/>
+  <circle cx="115" cy="75" r="8" fill="#ffffff"/>
+  <circle cx="85" cy="75" r="4" fill="#000000"/>
+  <circle cx="115" cy="75" r="4" fill="#000000"/>
+  
+  <!-- 嘴巴 -->
+  <path d="M90,100 Q100,110 110,100" stroke="#000000" stroke-width="2" fill="none"/>
+  
+  <!-- 胡须 -->
+  <path d="M70,95 L95,95" stroke="#000000" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M70,85 L95,88" stroke="#000000" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M105,95 L130,95" stroke="#000000" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M105,88 L130,85" stroke="#000000" stroke-width="1.5" stroke-linecap="round"/>
+  
+  <!-- 耳朵 -->
+  <path d="M70,30 L50,50 L70,70" fill="#d2b48c" stroke="#8b4513" stroke-width="2"/>
+  <path d="M130,30 L150,50 L130,70" fill="#d2b48c" stroke="#8b4513" stroke-width="2"/>
+  
+  <!-- 程序员元素 - 键盘 -->
+  <rect x="70" y="130" width="60" height="30" rx="2" ry="2" fill="#3d2b1f" stroke="#000000" stroke-width="1"/>
+  <rect x="75" y="135" width="5" height="5" rx="1" ry="1" fill="#ffffff"/>
+  <rect x="85" y="135" width="5" height="5" rx="1" ry="1" fill="#ffffff"/>
+  <rect x="95" y="135" width="5" height="5" rx="1" ry="1" fill="#ffffff"/>
+  <rect x="105" y="135" width="5" height="5" rx="1" ry="1" fill="#ffffff"/>
+  <rect x="75" y="145" width="5" height="5" rx="1" ry="1" fill="#ffffff"/>
+  <rect x="85" y="145" width="5" height="5" rx="1" ry="1" fill="#ffffff"/>
+  <rect x="95" y="145" width="5" height="5" rx="1" ry="1" fill="#ffffff"/>
+  <rect x="105" y="145" width="5" height="5" rx="1" ry="1" fill="#ffffff"/>
+  
+  <!-- 强调色元素 -->
+  <circle cx="150" cy="150" r="15" fill="#d4af37"/>
+  <text x="150" y="155" font-family="Arial" font-size="12" font-weight="bold" text-anchor="middle" fill="#ffffff">Ben</text>
+</svg>

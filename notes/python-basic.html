@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Python基础：语法与核心概念 | 程序员Ben的学习笔记</title>
+  <meta name="description" content="详细介绍Python语言的基本语法和核心概念，包括变量、数据类型、控制结构、函数定义等基础内容。" />
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <a href="../index.html" class="back">← 返回主页</a>
+  <div class="wrapper">
+    <header>
+      <h1>Python基础：语法与核心概念</h1>
+      <p style="color: var(--muted);">发布于：2025年9月5日 | 作者：程序员Ben（用爪子敲代码的狸花猫）</p>
+    </header>
+    
+    <div class="note-content">
+      <p>大家好，我是Ben，一只正在学习编程的狸花猫。今天我要和大家分享Python语言的基本语法和核心概念。Python是一种简单易学且功能强大的编程语言，被广泛应用于数据分析、人工智能、Web开发等领域。</p>
+      
+      <h2>1. Python的基本特点</h2>
+      <p>Python有以下几个主要特点：</p>
+      <ul>
+        <li><strong>易学易用</strong>：语法简洁清晰，代码可读性高</li>
+        <li><strong>解释执行</strong>：无需编译，可以直接运行</li>
+        <li><strong>面向对象</strong>：支持面向对象编程</li>
+        <li><strong>丰富的库</strong>：拥有强大的标准库和第三方库</li>
+        <li><strong>跨平台</strong>：可以在Windows、Mac、Linux等系统上运行</li>
+      </ul>
+      
+      <h2>2. 变量与数据类型</h2>
+      
+      <h3>2.1 变量</h3>
+      <p>在Python中，变量不需要声明类型，直接赋值即可创建变量。</p>
+      <div class="example">
+        <h4>示例代码：</h4>
+        <pre><code># 创建变量并赋值
+name = "Ben"
+age = 0.75  # 9个月，换算为0.75岁
+weight = 4.2  # 体重，单位kg
+is_coder = True
+
+# 打印变量\print(name)\print("年龄：", age, "岁")\print(f"{name}的体重是{weight}kg")
+
+# 变量可以重新赋值，并且类型可以改变
+age = "9个月"  # 从数值型变为字符串型
+print(age)</code></pre>
+      </div>
+      
+      <h3>2.2 基本数据类型</h3>
+      <p>Python支持多种数据类型，主要包括：</p>
+      
+      <h4>2.2.1 数值类型</h4>
+      <ul>
+        <li><strong>整数（int）</strong>：如1, 2, -5</li>
+        <li><strong>浮点数（float）</strong>：如3.14, -0.5</li>
+        <li><strong>复数（complex）</strong>：如1+2j</li>
+      </ul>
+      
+      <h4>2.2.2 字符串（str）</h4>
+      <p>用于表示文本，可以使用单引号、双引号或三引号。</p>
+      <div class="example">
+        <h4>示例代码：</h4>
+        <pre><code># 字符串表示
+str1 = 'Hello'
+str2 = "World"
+str3 = '''这是一个
+多行字符串'''
+
+# 字符串拼接
+message = str1 + ' ' + str2  # "Hello World"
+
+# 字符串格式化
+welcome = f"欢迎，{name}！"  # 使用f-string（Python 3.6+）
+welcome2 = "欢迎，%s！" % name  # 使用格式化操作符
+welcome3 = "欢迎，{}！".format(name)  # 使用format方法
+
+# 字符串方法
+greeting = "Hello, Python!"
+print(greeting.lower())  # "hello, python!"
+print(greeting.upper())  # "HELLO, PYTHON!"
+print(greeting.replace("Python", "World"))  # "Hello, World!"
+print(greeting.split(", "))  # ['Hello', 'Python!']</code></pre>
+      </div>
+      
+      <h4>2.2.3 布尔值（bool）</h4>
+      <p>只有两个值：True和False，用于逻辑运算。</p>
+      
+      <h4>2.2.4 列表（list）</h4>
+      <p>有序的可变序列，可以包含不同类型的元素。</p>
+      <div class="example">
+        <h4>示例代码：</h4>
+        <pre><code># 创建列表
+cat_breeds = ["LiHua", "Ragdoll", "Siamese", "British Shorthair"]
+numbers = [1, 2, 3, 4, 5]
+mixed_list = ["Ben", 0.75, 4.2, True]
+
+# 访问列表元素（Python索引从0开始）
+first_breed = cat_breeds[0]  # "LiHua"
+last_breed = cat_breeds[-1]  # "British Shorthair"
+
+# 修改列表元素
+cat_breeds[1] = "Persian"
+
+# 添加元素
+cat_breeds.append("Maine Coon")  # 在末尾添加
+cat_breeds.insert(2, "Sphynx")  # 在指定位置插入
+
+# 删除元素
+cat_breeds.remove("Siamese")  # 删除指定值的元素
+removed = cat_breeds.pop()  # 删除并返回最后一个元素
+
+# 列表切片
+first_two = cat_breeds[0:2]  # 获取前两个元素
+every_other = cat_breeds[::2]  # 每隔一个元素取一个
+reversed_list = cat_breeds[::-1]  # 反转列表</code></pre>
+      </div>
+      
+      <h4>2.2.5 元组（tuple）</h4>
+      <p>有序的不可变序列，类似于列表，但创建后不能修改。</p>
+      <div class="example">
+        <h4>示例代码：</h4>
+        <pre><code># 创建元组
+cat_info = ("Ben", "LiHua", 0.75, 4.2)
+# 也可以不使用括号
+cat_info2 = "Momo", "Ragdoll", 1.2, 5.8
+
+# 访问元素
+cat_name = cat_info[0]  # "Ben"
+
+# 尝试修改元组（会报错）
+# cat_info[0] = "Max"  # TypeError: 'tuple' object does not support item assignment
+
+# 元组解包
+name, breed, age, weight = cat_info
+print(f"名字：{name}, 品种：{breed}, 年龄：{age}岁, 体重：{weight}kg")</code></pre>
+      </div>
+      
+      <h4>2.2.6 字典（dict）</h4>
+      <p>无序的键值对集合，用于存储映射关系。</p>
+      <div class="example">
+        <h4>示例代码：</h4>
+        <pre><code># 创建字典
+ben_info = {
+    "name": "Ben",
+    "breed": "LiHua",
+    "age": 0.75,
+    "weight": 4.2,
+    "hobbies": ["coding", "sleeping", "playing"]
+}
+
+# 访问值
+cat_name = ben_info["name"]  # "Ben"
+# 使用get方法，避免键不存在时报错
+cat_color = ben_info.get("color", "Unknown")  # 不存在color键，返回默认值"Unknown"
+
+# 修改值
+ben_info["age"] = 0.8
+
+# 添加新的键值对
+ben_info["color"] = "Brown"
+
+# 删除键值对
+del ben_info["color"]
+
+# 遍历字典
+for key in ben_info:
+    print(f"{key}: {ben_info[key]}")
+
+for key, value in ben_info.items():
+    print(f"{key}: {value}")</code></pre>
+      </div>
+      
+      <h2>3. 控制流程</h2>
+      
+      <h3>3.1 条件语句（if-elif-else）</h3>
+      <p>用于根据条件执行不同的代码块。</p>
+      <div class="example">
+        <h4>示例代码：</h4>
+        <pre><code>age = 0.75  # Ben的年龄（岁）
+
+if age < 1:
+    print("这是一只小猫")\elif age < 8:
+    print("这是一只成年猫")\else:
+    print("这是一只老年猫")
+
+# 嵌套条件语句
+temperature = 25
+is_rainy = False
+
+if temperature > 30:
+    print("天气很热")
+    if is_rainy:
+        print("又热又湿，感觉像蒸笼")
+    else:
+        print("阳光明媚，适合户外活动")\elif 20 <= temperature <= 30:
+    print("天气舒适")\else:
+    print("天气较冷")</code></pre>
+      </div>
+      
+      <h3>3.2 循环语句</h3>
+      
+      <h4>3.2.1 for循环</h4>
+      <p>用于遍历序列（如列表、元组、字符串）或其他可迭代对象。</p>
+      <div class="example">
+        <h4>示例代码：</h4>
+        <pre><code># 遍历列表
+cat_breeds = ["LiHua", "Ragdoll", "Siamese", "British Shorthair"]
+for breed in cat_breeds:
+    print(breed)
+
+# 使用range函数生成数字序列
+for i in range(5):  # 0, 1, 2, 3, 4
+    print(i)
+
+for i in range(2, 10, 2):  # 从2开始，到10结束（不包含），步长为2
+    print(i)  # 2, 4, 6, 8
+
+# 遍历字典
+ben_info = {"name": "Ben", "breed": "LiHua", "age": 0.75}
+for key, value in ben_info.items():
+    print(f"{key}: {value}")
+
+# 使用enumerate获取索引和值
+for index, breed in enumerate(cat_breeds):
+    print(f"第{index+1}个品种：{breed}")</code></pre>
+      </div>
+      
+      <h4>3.2.2 while循环</h4>
+      <p>只要条件为真，就重复执行代码块。</p>
+      <div class="example">
+        <h4>示例代码：</h4>
+        <pre><code># 简单的while循环
+count = 0
+while count < 5:
+    print(f"计数：{count}")
+    count += 1
+
+# 使用break语句跳出循环
+i = 0
+while True:
+    print(i)
+    i += 1
+    if i >= 5:
+        break
+
+# 使用continue语句跳过当前迭代
+for i in range(10):
+    if i % 2 == 0:
+        continue  # 跳过偶数
+    print(i)  # 只打印奇数</code></pre>
+      </div>
+      
+      <div class="tip">
+        <strong>Ben的学习小提示：</strong><br>
+        在Python中，缩进是非常重要的！Python使用缩进来标识代码块，而不是使用大括号。通常使用4个空格或1个制表符进行缩进。
+      </div>
+      
+      <h2>4. 函数</h2>
+      <p>函数是组织好的、可重复使用的、用来实现特定功能的代码块。</p>
+      
+      <h3>4.1 函数定义与调用</h3>
+      <div class="example">
+        <h4>示例代码：</h4>
+        <pre><code># 定义一个简单的函数
+def greet(name):
+    """打印问候信息（这是文档字符串）"""
+    print(f"你好，{name}！")
+
+# 调用函数
+greet("Ben")  # 输出：你好，Ben！
+
+# 查看函数的文档字符串
+print(greet.__doc__)
+
+# 带返回值的函数
+def calculate_sum(a, b):
+    """计算两个数的和"""
+    return a + b
+
+# 调用带返回值的函数
+result = calculate_sum(3, 5)
+print(result)  # 输出：8</code></pre>
+      </div>
+      
+      <h3>4.2 函数参数类型</h3>
+      <div class="example">
+        <h4>示例代码：</h4>
+        <pre><code># 位置参数
+def describe_cat(name, breed, age):
+    print(f"名字：{name}, 品种：{breed}, 年龄：{age}岁")
+
+# 按位置传递参数
+describe_cat("Ben", "LiHua", 0.75)
+
+# 关键字参数（可以改变顺序）
+describe_cat(breed="Ragdoll", name="Momo", age=1.2)
+
+# 默认参数（为参数提供默认值）
+def describe_cat2(name, breed, age=1):
+    print(f"名字：{name}, 品种：{breed}, 年龄：{age}岁")
+
+# 不提供默认参数的值
+describe_cat2("Lucky", "British Shorthair")  # 年龄使用默认值1
+# 提供默认参数的值
+describe_cat2("Coco", "Siamese", 1.5)
+
+# 可变参数（*args接收任意数量的位置参数，形成元组）
+def sum_numbers(*args):
+    total = 0
+    for num in args:
+        total += num
+    return total
+
+print(sum_numbers(1, 2, 3, 4, 5))  # 输出：15
+
+# 关键字可变参数（**kwargs接收任意数量的关键字参数，形成字典）
+def print_info(**kwargs):
+    for key, value in kwargs.items():
+        print(f"{key}: {value}")
+
+print_info(name="Ben", breed="LiHua", age=0.75, weight=4.2)</code></pre>
+      </div>
+      
+      <h2>5. 面向对象编程基础</h2>
+      <p>Python是一种面向对象的编程语言，支持类、对象、继承、多态等面向对象的特性。</p>
+      
+      <h3>5.1 类和对象</h3>
+      <div class="example">
+        <h4>示例代码：</h4>
+        <pre><code># 定义一个Cat类
+class Cat:
+    # 初始化方法（构造函数）
+    def __init__(self, name, breed, age, weight):
+        # 实例属性
+        self.name = name
+        self.breed = breed
+        self.age = age
+        self.weight = weight
+        
+    # 实例方法
+    def meow(self):
+        print(f"{self.name} says 'Meow!'")
+        
+    def eat(self, food):
+        print(f"{self.name} is eating {food}.")
+        self.weight += 0.1  # 吃完食物后体重增加一点
+        print(f"{self.name}'s weight is now {self.weight}kg.")
+        
+    def get_info(self):
+        return f"名字：{self.name}, 品种：{self.breed}, 年龄：{self.age}岁, 体重：{self.weight}kg"
+
+# 创建Cat类的实例（对象）
+ben = Cat("Ben", "LiHua", 0.75, 4.2)
+momo = Cat("Momo", "Ragdoll", 1.2, 5.8)
+
+# 访问对象的属性
+print(ben.name)  # 输出：Ben
+print(momo.breed)  # 输出：Ragdoll
+
+# 调用对象的方法
+ben.meow()  # 输出：Ben says 'Meow!'
+ben.eat("fish")
+info = momo.get_info()
+print(info)</code></pre>
+      </div>
+      
+      <h3>5.2 继承</h3>
+      <p>继承允许创建一个新类，继承现有类的属性和方法。</p>
+      <div class="example">
+        <h4>示例代码：</h4>
+        <pre><code># 父类（基类）
+class Animal:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+        
+    def eat(self):
+        print(f"{self.name} is eating.")
+        
+    def sleep(self):
+        print(f"{self.name} is sleeping.")
+
+# 子类（派生类）继承自Animal
+class Cat(Animal):
+    def __init__(self, name, age, breed, weight):
+        # 调用父类的初始化方法
+        super().__init__(name, age)
+        self.breed = breed
+        self.weight = weight
+        
+    # 重写父类的方法
+    def eat(self, food="cat food"):
+        print(f"{self.name} the {self.breed} is eating {food}.")
+        self.weight += 0.1
+        
+    # 添加子类特有的方法
+    def meow(self):
+        print(f"{self.name} says 'Meow!'")
+
+# 创建子类的实例
+ben = Cat("Ben", 0.75, "LiHua", 4.2)
+
+# 调用继承的方法
+ben.sleep()  # 输出：Ben is sleeping.
+
+# 调用重写的方法
+ben.eat("fish")  # 输出：Ben the LiHua is eating fish.
+
+# 调用子类特有的方法
+ben.meow()  # 输出：Ben says 'Meow!'
+
+# 检查对象类型
+print(isinstance(ben, Cat))  # True
+print(isinstance(ben, Animal))  # True</code></pre>
+      </div>
+      
+      <h2>6. 模块与包</h2>
+      <p>Python使用模块和包来组织代码，实现代码的重用和命名空间管理。</p>
+      
+      <h3>6.1 模块</h3>
+      <p>模块是一个包含Python定义和语句的文件，文件名就是模块名加上.py后缀。</p>
+      <div class="example">
+        <h4>示例代码：</h4>
+        <pre><code># 导入整个模块
+import math
+print(math.sqrt(16))  # 输出：4.0
+print(math.pi)  # 输出：3.141592653589793
+
+# 导入模块的特定函数
+from math import sqrt, pi
+print(sqrt(25))  # 输出：5.0
+print(pi)  # 输出：3.141592653589793
+
+# 导入模块的所有内容（不推荐）
+from math import *
+print(cos(0))  # 输出：1.0
+
+# 导入模块并使用别名
+import numpy as np
+import pandas as pd
+
+# 导入自己的模块（假设当前目录下有一个cat_functions.py文件）
+import cat_functions
+cat_functions.calculate_cat_age(9)  # 调用模块中的函数</code></pre>
+      </div>
+      
+      <h2>7. 实战练习</h2>
+      <p>现在，让我们通过一个简单的练习来巩固所学的知识：</p>
+      <div class="example">
+        <h4>练习任务：</h4>
+        <p>编写一个Python程序，实现以下功能：</p>
+        <ol>
+          <li>创建一个Cat类，包含姓名、品种、年龄和体重属性</li>
+          <li>为Cat类添加方法：计算猫咪的人类年龄（1猫年≈7人年）、打印猫咪信息</li>
+          <li>创建3只猫咪的实例，存储在列表中</li>
+          <li>遍历列表，打印每只猫咪的信息和人类年龄</li>
+          <li>找出体重最大的猫咪并输出</li>
+        </ol>
+        
+        <h4>参考答案：</h4>
+        <pre><code>class Cat:
+    def __init__(self, name, breed, age, weight):
+        self.name = name
+        self.breed = breed
+        self.age = age  # 猫年
+        self.weight = weight
+    
+    def get_human_age(self):
+        """计算猫咪的人类年龄（1猫年≈7人年）"""
+        return self.age * 7
+    
+    def get_info(self):
+        """返回猫咪的信息"""
+        return f"名字：{self.name}, 品种：{self.breed}, 年龄：{self.age}岁（{self.get_human_age()}人年）, 体重：{self.weight}kg"
+
+# 创建猫咪实例
+ben = Cat("Ben", "LiHua", 0.75, 4.2)
+momo = Cat("Momo", "Ragdoll", 1.2, 5.8)
+lucky = Cat("Lucky", "British Shorthair", 2, 6.5)
+
+# 存储在列表中
+cats = [ben, momo, lucky]
+
+# 遍历列表，打印每只猫咪的信息
+print("=== 猫咪信息列表 ===")
+for cat in cats:
+    print(cat.get_info())
+
+# 找出体重最大的猫咪
+max_weight_cat = max(cats, key=lambda x: x.weight)
+print(f"\n体重最大的猫咪是：{max_weight_cat.name}，体重：{max_weight_cat.weight}kg")</code></pre>
+      </div>
+      
+      <h2>8. 总结</h2>
+      <p>在本笔记中，我们学习了Python语言的基本语法和核心概念，包括：</p>
+      <ul>
+        <li>变量和基本数据类型（数值、字符串、列表、元组、字典等）</li>
+        <li>控制流程（条件语句、循环语句）</li>
+        <li>函数定义和调用</li>
+        <li>面向对象编程基础（类和对象、继承）</li>
+        <li>模块和包的导入和使用</li>
+      </ul>
+      <p>Python是一门功能强大且易于学习的编程语言，掌握这些基础知识后，你可以开始进行更复杂的编程任务，如数据分析、Web开发、人工智能等。</p>
+      <p>下一篇笔记，我将介绍Python的数据分析库Pandas的使用方法，敬请期待！</p>
+    </div>
+    
+    <footer>
+      © 2025 程序员Ben的学习笔记 | 用爪子敲代码的狸花猫出品
+    </footer>
+  </div>
+</body>
+</html>
