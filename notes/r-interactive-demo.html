@@ -59,33 +59,34 @@
         }
       }
       
-      // R代码运行模拟器功能
+      // R代码运行模拟器功能 - 简化版本
       const runButtons = document.querySelectorAll('.run-r-code');
+      
+      // 为每个运行按钮添加点击事件
       runButtons.forEach(button => {
         button.addEventListener('click', function() {
+          // 获取当前示例的所有相关元素
           const exampleContainer = this.closest('.r-example');
-          const codeBlock = exampleContainer.querySelector('.r-code');
           const resultBlock = exampleContainer.querySelector('.r-result');
           const loadingIndicator = exampleContainer.querySelector('.loading');
           
-          // 显示加载状态
-          loadingIndicator.style.display = 'block';
+          // 只进行必要的检查
+          if (!resultBlock || !loadingIndicator) {
+            return;
+          }
+          
+          // 重置并显示加载状态
           resultBlock.style.display = 'none';
+          loadingIndicator.style.display = 'block';
           
           // 模拟代码运行延迟
           setTimeout(() => {
             // 隐藏加载状态
             loadingIndicator.style.display = 'none';
             
-            // 显示结果
+            // 显示结果 - 使用最简单的方式
             resultBlock.style.display = 'block';
-            
-            // 添加结果区域的动画效果
-            resultBlock.style.opacity = '0';
-            setTimeout(() => {
-              resultBlock.style.transition = 'opacity 0.5s ease';
-              resultBlock.style.opacity = '1';
-            }, 10);
+            resultBlock.style.opacity = '1';
           }, 1000);
         });
       });
