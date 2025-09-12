@@ -10,9 +10,26 @@
   <meta property="og:type" content="website" />
   <meta property="og:locale" content="zh_CN" />
   <meta name="theme-color" content="#8b4513">
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/style.css" id="theme-stylesheet">
 </head>
 <body>
+  <div class="theme-switcher">
+    <button id="toggle-theme" class="theme-btn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="20" height="20">
+        <circle cx="12" cy="12" r="5"></circle>
+        <line x1="12" y1="1" x2="12" y2="3"></line>
+        <line x1="12" y1="21" x2="12" y2="23"></line>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+        <line x1="1" y1="12" x2="3" y2="12"></line>
+        <line x1="21" y1="12" x2="23" y2="12"></line>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+      </svg>
+      切换主题
+    </button>
+  </div>
+  
   <div class="wrapper">
     <div class="grid">
       <!-- 侧边栏（狸花猫程序员Ben信息） -->
@@ -231,5 +248,59 @@
       © 2025 程序员Ben · 狸花猫的技术学习主页 | 今日学习进度：<span class="code">Java基础 ✅ | SpringBoot 🔄 | Python爬虫 ✅</span> 🐱💻
     </footer>
   </div>
+  
+  <script>
+    // 主题切换功能
+    const themeStylesheet = document.getElementById('theme-stylesheet');
+    const toggleThemeBtn = document.getElementById('toggle-theme');
+    const themeIcon = toggleThemeBtn.querySelector('svg');
+    let isModernTheme = false;
+    
+    // 检查本地存储中的主题偏好
+    const savedTheme = localStorage.getItem('preferred-theme');
+    if (savedTheme === 'modern') {
+      themeStylesheet.href = 'css/modern-style.css';
+      isModernTheme = true;
+      updateThemeButton();
+    }
+    
+    toggleThemeBtn.addEventListener('click', () => {
+      if (isModernTheme) {
+        themeStylesheet.href = 'css/style.css';
+        localStorage.setItem('preferred-theme', 'original');
+      } else {
+        themeStylesheet.href = 'css/modern-style.css';
+        localStorage.setItem('preferred-theme', 'modern');
+      }
+      isModernTheme = !isModernTheme;
+      updateThemeButton();
+    });
+    
+    function updateThemeButton() {
+      if (isModernTheme) {
+        toggleThemeBtn.innerHTML = `
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="20" height="20">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+          原始主题
+        `;
+      } else {
+        toggleThemeBtn.innerHTML = `
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="20" height="20">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+          现代主题
+        `;
+      }
+    }
+  </script>
 </body>
 </html>

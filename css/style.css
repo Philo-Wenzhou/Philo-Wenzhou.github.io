@@ -13,6 +13,41 @@
   --border: #d9c8b4;       /* 边框色（浅棕，分割内容块） */
 }
 
+/* 主题切换器样式 */
+.theme-switcher {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+}
+
+.theme-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 25px;
+  color: var(--brand);
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(61,43,31,.1);
+}
+
+.theme-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(61,43,31,.15);
+  background: var(--card);
+  color: var(--accent);
+}
+
+.theme-btn svg {
+  flex-shrink: 0;
+}
+
 /* 基础重置 */
 *,*::before,*::after{ box-sizing:border-box }
 html,body{ height:100% }
