@@ -1,5 +1,5 @@
 
-title: "易文星 | 技术与学术主页"
+title: "Wenxing Yi | 技术与学术主页"
 description: "生态学 × 数据科学 × 气象遥感建模｜持续更新的研究与工作笔记"
 url: "https://philo-wenzhou.github.io"
 baseurl: "" # 子路径，比如 /blog，如果没有就留空
@@ -53,13 +53,13 @@ exclude:
 
 # 自定义变量
 author:
-  name: "易文星"
+  name: "Wenxing Yi"
   email: "philoyiwenxing@163.com"
 
 # SEO
 seo:
   type: "Person"
-  name: "易文星"
+  name: "Wenxing Yi"
   links:
     - "mailto:philoyiwenxing@163.com"
 
